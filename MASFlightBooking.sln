@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32112.339
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MASFlightBooking.Domain", "MASFlightBooking.Domain\MASFlightBooking.Domain.csproj", "{5F16CFCA-8720-4489-B8BE-DDDC6D87047F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MASFlightBooking.DataAccess", "MASFlightBooking.DataAccess\MASFlightBooking.DataAccess.csproj", "{F80EC5C9-E125-41C5-8047-8B7EB825A00D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MASFlightBooking.WebAPI", "MASFlightBooking.WebAPI\MASFlightBooking.WebAPI.csproj", "{8DC2646F-98AF-4FBF-85EF-3AD5F31E4FF3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5F16CFCA-8720-4489-B8BE-DDDC6D87047F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F16CFCA-8720-4489-B8BE-DDDC6D87047F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F16CFCA-8720-4489-B8BE-DDDC6D87047F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F16CFCA-8720-4489-B8BE-DDDC6D87047F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F80EC5C9-E125-41C5-8047-8B7EB825A00D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F80EC5C9-E125-41C5-8047-8B7EB825A00D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F80EC5C9-E125-41C5-8047-8B7EB825A00D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F80EC5C9-E125-41C5-8047-8B7EB825A00D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8DC2646F-98AF-4FBF-85EF-3AD5F31E4FF3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8DC2646F-98AF-4FBF-85EF-3AD5F31E4FF3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8DC2646F-98AF-4FBF-85EF-3AD5F31E4FF3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8DC2646F-98AF-4FBF-85EF-3AD5F31E4FF3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {00213A01-D876-4669-B95E-25B241B03095}
+	EndGlobalSection
+EndGlobal
