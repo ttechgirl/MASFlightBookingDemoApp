@@ -9,34 +9,41 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using static MASFlightBooking.Domain.Models.UserIdentityModel;
 using System.Configuration;
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
-//var Configuration = new Configuration();
+//Add services to the container.
 
-
-// Add services to the container.
 builder.Services.AddScoped<IMASFlightInterface, MASFlightRepository>();
-builder.Services.AddScoped<IPaymentInterfaces ,PaymentRepository>();
+builder.Services.AddScoped<IPaymentInterface, PaymentRepository>();
 builder.Services.AddScoped<IUserInterface, UserRepository>();
-builder.Services.AddDbContext<MASFlightDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("ConnectToDB")));
+builder.Services.AddDbContext<MASFlightDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("ConnectToDB")));
 
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(opt => {
 
-builder.Services.AddIdentity<AppUsers, IdentityUser>(opt =>
+    opt.SwaggerDoc("v1", new OpenApiInfo
+    {
+        Version = "v1",
+        Title = "MASFlightBooking UI",
+        Description = "Displaying Swagger UI example"
+
+    });
+});
+
+builder.Services.AddIdentity<AppUsers, AppRoles>(opt =>
 {
     opt.Password.RequireDigit = true;
     opt.Password.RequireUppercase = true;
     opt.Password.RequireLowercase = true;
     opt.Password.RequiredLength = 8;
     opt.Password.RequiredUniqueChars = 1;
-
     opt.SignIn.RequireConfirmedEmail = true;
 })
-                   .AddEntityFrameworkStores<MASFlightDbContext>()
-                   .AddDefaultTokenProviders();
+   .AddEntityFrameworkStores<MASFlightDbContext>()
+   .AddDefaultTokenProviders()
+   .AddSignInManager<SignInManager<AppUsers>>();
 
 builder.Services.AddAuthentication(opts =>
 {
@@ -53,13 +60,15 @@ builder.Services.AddAuthentication(opts =>
         {
             ValidateIssuer = true,
             ValidateAudience = true,
-            ValidAudience = Configuration["JWT:ValidAudience"],
-            ValidIssuer = Configuration["JWT:ValidIssuer"],
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JWT:Secret"])),
-            ValidateLifetime = true,
+            ValidAudience = builder.Configuration["JWT:ValidAudience"],
+            ValidIssuer =builder.Configuration["JWT:ValidIssuer"],
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWT:Secret"])),
+            ValidateLifetime = true
         };
 
     });
+
+
 var app = builder.Build();
 
 
@@ -69,12 +78,13 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-(
+
 app.UseHttpsRedirection();
 
 app.UseAuthentication();
 
 app.UseAuthorization();
+
 
 app.MapControllers();
 

@@ -10,6 +10,7 @@ namespace MASFlightBooking.Domain.Models
     public class MASFlightBookingModel : BaseEntity
     {
         public string? TicketName { get; set; }
+        public string? MobileNumber { get; set; }
         public int Number_of_passanger { get; set; }
         public int Airline { get; set; }
         public int Departure { get; set; }

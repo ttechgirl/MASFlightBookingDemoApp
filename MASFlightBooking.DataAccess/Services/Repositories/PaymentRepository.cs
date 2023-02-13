@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace MASFlightBooking.DataAccess.Services.Repositories
 {
-    public class PaymentRepository : IPaymentInterfaces
+    public class PaymentRepository : IPaymentInterface
     {
         private readonly IConfiguration configuration;
         public PaymentRepository(IConfiguration configuration)

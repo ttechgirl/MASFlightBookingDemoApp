@@ -14,8 +14,8 @@ namespace MASFlightBooking.DataAccess.Services.Repositories
     public class MASFlightRepository : IMASFlightInterface
     {
         private MASFlightDbContext _appflightDbContext;
-        private readonly IPaymentInterfaces _paymentInterfaces;
-        public MASFlightRepository(MASFlightDbContext flightDbContext,IPaymentInterfaces paymentInterfaces)
+        private readonly IPaymentInterface _paymentInterfaces;
+        public MASFlightRepository(MASFlightDbContext flightDbContext,IPaymentInterface paymentInterfaces)
         {
             _appflightDbContext = flightDbContext;
             _paymentInterfaces = paymentInterfaces;
@@ -23,12 +23,16 @@ namespace MASFlightBooking.DataAccess.Services.Repositories
 
         public async Task<IEnumerable<MASFlightBookingModel>> GetALLFlight()
         {
-            return await _appflightDbContext.MASFlights.ToListAsync();
+             return await _appflightDbContext.MASFlights.ToListAsync();
+            //throw new NotImplementedException();
+
         }
 
         public async Task<MASFlightBookingModel> GetMASFlights(Guid Id)
         {
             return await _appflightDbContext.MASFlights.FirstOrDefaultAsync(b => b.Id == Id);
+            //throw new NotImplementedException();
+
         }
 
         public Task<MASFlightBookingModel> BuyFlight_Ticket(MASFlightBookingModel masflight)

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MASFlightBooking.DataAccess.Services.Interfaces
 {
-    public interface IPaymentInterfaces
+    public interface IPaymentInterface
     {
         Task<PaymentResponseModel> InitiatePayment(PaymentRequestModel model);
 

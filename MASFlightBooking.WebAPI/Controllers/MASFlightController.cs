@@ -15,7 +15,11 @@ namespace MASFlightBooking.WebAPI.Controllers
             _masFlightInterface = masFlightInterface;
         }
        
-        [HttpGet("")]
-        public IActionResult 
+        [HttpGet("api/GetAllFlights")]
+        public IActionResult GetAllFlight()
+        {
+            var allflights =_masFlightInterface.GetALLFlight();
+            return Ok(allflights);
+        }
     }
 }
