@@ -10,10 +10,14 @@ namespace MASFlightBooking.DataAccess.Services.Interfaces
 {
     public interface IMASFlightInterface
     {
-        Task<IEnumerable<MASFlightBookingModel>> GetALLFlight();
-        Task<MASFlightBookingModel> GetMASFlights(Guid Id);
+        Task<IEnumerable<MASFlightBookingModel>> GetAllFlight();
+        Task<MASFlightBookingModel> GetSingleFlight(Guid Id);
         Task<MASFlightBookingModel> BuyFlight_Ticket(MASFlightBookingModel masflight);
         Task<MASFlightBookingModel> UpdateFlight_Details(MASFlightBookingModel masflight);
         void Revoke_Flight(long BookingId);
+        Task<MASFlightBookingModel>CreateBooking(MASFlightViewModel model);
+    
+    
+    
     }
 }

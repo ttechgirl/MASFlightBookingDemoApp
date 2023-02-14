@@ -11,12 +11,13 @@ namespace MASFlightBooking.Domain.Models
     {
         public string? TicketName { get; set; }
         public string? MobileNumber { get; set; }
-        public int Number_of_passanger { get; set; }
+        public int Number_of_Passanger { get; set; }
+        public decimal? Amount_per_Seat { get; } = 40000;
         public int Airline { get; set; }
         public int Departure { get; set; }
         public int Destination { get; set; }
         public int FlightCategories { get; set; }
-        public int TravelerAge { get; set; }
+        public int TravelersAge { get; set; }
         public int TripType { get; set; }
         public DateTime UpdatedOn { get; set;} 
 

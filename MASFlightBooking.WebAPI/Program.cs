@@ -19,7 +19,7 @@ builder.Services.AddScoped<IMASFlightInterface, MASFlightRepository>();
 builder.Services.AddScoped<IPaymentInterface, PaymentRepository>();
 builder.Services.AddScoped<IUserInterface, UserRepository>();
 builder.Services.AddDbContext<MASFlightDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("ConnectToDB")));
-
+builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(opt => {
 
@@ -84,7 +84,6 @@ app.UseHttpsRedirection();
 app.UseAuthentication();
 
 app.UseAuthorization();
-
 
 app.MapControllers();
 

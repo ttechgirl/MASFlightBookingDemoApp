@@ -16,19 +16,18 @@ namespace MASFlightBooking.Domain.Context
     public class MASFlightDbContext : IdentityDbContext<AppUsers,AppRoles,Guid,AppUserClaim,AppUserRoles, AppUserLogin,AppRoleClaim, AppUserToken>
     {
         public MASFlightDbContext(DbContextOptions<MASFlightDbContext> options) : base(options)
-        {
+        { }
 
-        }
-       
+        public DbSet<MASFlightBookingModel> MASFlights { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
            base.OnModelCreating(builder);
             builder.UseIdentityColumns();
+            builder.Seed();
 
         }
 
-        public DbSet<MASFlightBookingModel> MASFlights { get; set; }
 
        
     }

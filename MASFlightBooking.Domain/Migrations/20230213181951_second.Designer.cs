@@ -4,6 +4,7 @@ using MASFlightBooking.Domain.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MASFlightBooking.Domain.Migrations
 {
     [DbContext(typeof(MASFlightDbContext))]
-    partial class MASFlightDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230213181951_second")]
+    partial class second
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -67,13 +69,13 @@ namespace MASFlightBooking.Domain.Migrations
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("Number_of_Passanger")
+                    b.Property<int>("Number_of_passanger")
                         .HasColumnType("int");
 
                     b.Property<string>("TicketName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("TravelersAge")
+                    b.Property<int>("TravelerAge")
                         .HasColumnType("int");
 
                     b.Property<int>("TripType")
@@ -89,57 +91,21 @@ namespace MASFlightBooking.Domain.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("43738933-acf0-4479-8624-0ef1bec0383d"),
+                            Id = new Guid("2f9bedec-cd5d-44da-b257-f75be9e37718"),
                             Airline = 1,
                             CreatedBy = "",
-                            CreatedOn = new DateTime(2023, 2, 14, 12, 2, 54, 890, DateTimeKind.Local).AddTicks(735),
+                            CreatedOn = new DateTime(2023, 2, 13, 19, 19, 50, 898, DateTimeKind.Local).AddTicks(5598),
                             DeletedBy = "",
                             Departure = 0,
                             Destination = 0,
                             FlightCategories = 0,
                             IsDeleted = false,
                             ModifiedBy = "",
-                            Number_of_Passanger = 1,
-                            TicketName = "Akeem Mustapha",
-                            TravelersAge = 0,
+                            Number_of_passanger = 2,
+                            TicketName = "Akeem",
+                            TravelerAge = 0,
                             TripType = 0,
-                            UpdatedOn = new DateTime(2023, 2, 14, 12, 2, 54, 890, DateTimeKind.Local).AddTicks(766)
-                        },
-                        new
-                        {
-                            Id = new Guid("6c7e9c5d-89ae-43d9-8f19-feb71af65e8f"),
-                            Airline = 0,
-                            CreatedBy = "",
-                            CreatedOn = new DateTime(2023, 2, 14, 12, 2, 54, 890, DateTimeKind.Local).AddTicks(781),
-                            DeletedBy = "",
-                            Departure = 0,
-                            Destination = 0,
-                            FlightCategories = 0,
-                            IsDeleted = false,
-                            ModifiedBy = "",
-                            Number_of_Passanger = 2,
-                            TicketName = "Oluwaseyi Kolawole",
-                            TravelersAge = 0,
-                            TripType = 0,
-                            UpdatedOn = new DateTime(2023, 2, 14, 12, 2, 54, 890, DateTimeKind.Local).AddTicks(787)
-                        },
-                        new
-                        {
-                            Id = new Guid("923a643a-9c41-464e-9fe3-29656c34e589"),
-                            Airline = 4,
-                            CreatedBy = "",
-                            CreatedOn = new DateTime(2023, 2, 14, 12, 2, 54, 890, DateTimeKind.Local).AddTicks(797),
-                            DeletedBy = "",
-                            Departure = 0,
-                            Destination = 0,
-                            FlightCategories = 0,
-                            IsDeleted = false,
-                            ModifiedBy = "",
-                            Number_of_Passanger = 3,
-                            TicketName = "Bolu Adefalu",
-                            TravelersAge = 0,
-                            TripType = 0,
-                            UpdatedOn = new DateTime(2023, 2, 14, 12, 2, 54, 890, DateTimeKind.Local).AddTicks(801)
+                            UpdatedOn = new DateTime(2023, 2, 13, 19, 19, 50, 898, DateTimeKind.Local).AddTicks(5630)
                         });
                 });
 
