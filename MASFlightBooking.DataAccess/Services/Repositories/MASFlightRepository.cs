@@ -1,4 +1,5 @@
-﻿using MASFlightBooking.DataAccess.Services.Interfaces;
+﻿using MASFlightBooking.DataAccess.Dtos;
+using MASFlightBooking.DataAccess.Services.Interfaces;
 using MASFlightBooking.Domain.Context;
 using MASFlightBooking.Domain.Models;
 using MASFlightBooking.Domain.Models.Payments;
@@ -20,63 +21,62 @@ namespace MASFlightBooking.DataAccess.Services.Repositories
             _appflightDbContext = flightDbContext;
         }
 
-        public async Task<IEnumerable<MASFlightBookingModel>> GetAllFlight()
+        public async Task<IEnumerable<MASFlightBookingDto>> GetAllFlight()
         {
-            // return await _appflightDbContext.Set<MASFlightBookingModel>().ToListAsync();
-            var allflight = await _appflightDbContext.MASFlights.ToListAsync();
-            return allflight;
+            var allFlight = await _appflightDbContext.MASFlights
+                .Include(p=>p.PassangerInfo)
+                .ToListAsync();
+            return allFlight.Select(x=>x.Map()); 
             
         }
 
-        public async Task<MASFlightBookingModel> GetSingleFlight(Guid Id)
+        public async Task<MASFlightBookingDto> GetSingleFlight(Guid Id)
         {
-            return await _appflightDbContext.MASFlights.FirstOrDefaultAsync(b => b.Id == Id);
+            var flight = await _appflightDbContext.MASFlights
+                .Include(p=> p.PassangerInfo)
+                .FirstOrDefaultAsync(x=> x.Id == Id);
+            if (flight == null) 
+            {
+                return null;
+            }
+            return flight.Map();
 
         }
 
-        public async Task<MASFlightBookingModel> BuyFlight_Ticket(MASFlightBookingModel masflight)
-        {
+        
 
-            var result =  _appflightDbContext.Set<MASFlightBookingModel>().Add(masflight);
+        public Task<MASFlightBookingViewModel> CreateBooking(MASFlightBookingModel model)
+        {
+            var flight = model.Mapp2();
+            var result =  _appflightDbContext.MASFlights.AddAsync(flight);
             await _appflightDbContext.SaveChangesAsync();
-            return result.Entity;
 
 
             var buyTicket = new MASFlightBookingModel()
             {
-                TicketName = masflight.TicketName,
-                Number_of_Passanger = masflight.Number_of_Passanger,
-                Destination = masflight.Destination,
-                Departure = masflight.Departure,
-                TripType = masflight.TripType,
-                FlightCategories = masflight.FlightCategories,
-                TravelersAge = masflight.TravelersAge,
-                Airline = masflight.Airline
+                //TicketName = masflight.TicketName,
+                //Number_of_Passanger = masflight.Number_of_Passanger,
+                //Destination = masflight.Destination,
+                //Departure = masflight.Departure,
+                //TripType = masflight.TripType,
+                //FlightCategories = masflight.FlightCategories,
+                //TravelersAge = masflight.TravelersAge,
+                //Airline = masflight.Airline
 
             };
+            return result
 
-
-
-          
-
-           
+            throw new NotImplementedException();
         }
 
-        public Task<MASFlightBookingModel> UpdateFlight_Details(MASFlightBookingModel masflight)
+        public Task<MASFlightBookingViewModel> UpdateFlight(MASFlightBookingViewModel masflight)
         {
             throw new NotImplementedException();
         }
 
-        public void Revoke_Flight(long BookingId)
+        public void Revoke_Flight(Guid Id)
         {
             throw new NotImplementedException();
         }
-
-        public Task<MASFlightBookingModel> CreateBooking(MASFlightViewModel model)
-        {
-            throw new NotImplementedException();
-        }
-
-       
     }
 }

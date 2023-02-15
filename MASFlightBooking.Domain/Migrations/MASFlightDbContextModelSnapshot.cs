@@ -22,14 +22,129 @@ namespace MASFlightBooking.Domain.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
+            modelBuilder.Entity("MASFlightBooking.Domain.Models.Airlines", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("AirlineName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DeletedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("ModifiedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Airlines");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("6c7e9c5d-89ae-43d9-8f19-feb71af65e8f"),
+                            AirlineName = "Dana_Air",
+                            CreatedBy = "",
+                            CreatedOn = new DateTime(2023, 2, 14, 23, 26, 27, 363, DateTimeKind.Local).AddTicks(4916),
+                            DeletedBy = "",
+                            IsDeleted = false,
+                            ModifiedBy = "",
+                            Status = 1
+                        });
+                });
+
+            modelBuilder.Entity("MASFlightBooking.Domain.Models.FlightCategory", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<decimal?>("AmountPerSeat")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("Category")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DeletedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("ModifiedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("FlightCategory");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("73c5bcba-65b6-46a3-897f-7d67fc0480b8"),
+                            AmountPerSeat = 50000m,
+                            Category = 3,
+                            CreatedBy = "",
+                            CreatedOn = new DateTime(2023, 2, 14, 23, 26, 27, 363, DateTimeKind.Local).AddTicks(5169),
+                            DeletedBy = "",
+                            IsDeleted = false,
+                            ModifiedBy = "",
+                            Status = 1
+                        });
+                });
+
             modelBuilder.Entity("MASFlightBooking.Domain.Models.MASFlightBookingModel", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("Airline")
-                        .HasColumnType("int");
+                    b.Property<Guid>("AirlineId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("BookedDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("CreatedBy")
                         .IsRequired()
@@ -51,14 +166,14 @@ namespace MASFlightBooking.Domain.Migrations
                     b.Property<int>("Destination")
                         .HasColumnType("int");
 
-                    b.Property<int>("FlightCategories")
-                        .HasColumnType("int");
+                    b.Property<Guid>("FlightCategoryId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("FlightTime")
+                        .HasColumnType("datetime2");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
-
-                    b.Property<string>("MobileNumber")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ModifiedBy")
                         .IsRequired()
@@ -67,22 +182,22 @@ namespace MASFlightBooking.Domain.Migrations
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("Number_of_Passanger")
-                        .HasColumnType("int");
+                    b.Property<Guid>("PassangerInfoId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("TicketName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("TravelersAge")
-                        .HasColumnType("int");
+                    b.Property<decimal>("TotalCost")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("TripType")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("UpdatedOn")
-                        .HasColumnType("datetime2");
-
                     b.HasKey("Id");
+
+                    b.HasIndex("AirlineId");
+
+                    b.HasIndex("FlightCategoryId");
+
+                    b.HasIndex("PassangerInfoId");
 
                     b.ToTable("MASFlights");
 
@@ -90,56 +205,153 @@ namespace MASFlightBooking.Domain.Migrations
                         new
                         {
                             Id = new Guid("43738933-acf0-4479-8624-0ef1bec0383d"),
-                            Airline = 1,
+                            AirlineId = new Guid("6c7e9c5d-89ae-43d9-8f19-feb71af65e8f"),
+                            BookedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CreatedBy = "",
-                            CreatedOn = new DateTime(2023, 2, 14, 12, 2, 54, 890, DateTimeKind.Local).AddTicks(735),
+                            CreatedOn = new DateTime(2023, 2, 14, 23, 26, 27, 363, DateTimeKind.Local).AddTicks(4394),
                             DeletedBy = "",
                             Departure = 0,
                             Destination = 0,
-                            FlightCategories = 0,
+                            FlightCategoryId = new Guid("73c5bcba-65b6-46a3-897f-7d67fc0480b8"),
+                            FlightTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsDeleted = false,
                             ModifiedBy = "",
-                            Number_of_Passanger = 1,
-                            TicketName = "Akeem Mustapha",
-                            TravelersAge = 0,
-                            TripType = 0,
-                            UpdatedOn = new DateTime(2023, 2, 14, 12, 2, 54, 890, DateTimeKind.Local).AddTicks(766)
-                        },
+                            PassangerInfoId = new Guid("923a643a-9c41-464e-9fe3-29656c34e589"),
+                            TotalCost = 0m,
+                            TripType = 0
+                        });
+                });
+
+            modelBuilder.Entity("MASFlightBooking.Domain.Models.NextofKin", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DeletedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("ModifiedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Relationhsip")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("NextofKin");
+
+                    b.HasData(
                         new
                         {
-                            Id = new Guid("6c7e9c5d-89ae-43d9-8f19-feb71af65e8f"),
-                            Airline = 0,
+                            Id = new Guid("0ffe12ec-ea61-4e47-8a5c-e753a5fe2823"),
+                            Address = "Abule egba ",
                             CreatedBy = "",
-                            CreatedOn = new DateTime(2023, 2, 14, 12, 2, 54, 890, DateTimeKind.Local).AddTicks(781),
+                            CreatedOn = new DateTime(2023, 2, 14, 23, 26, 27, 363, DateTimeKind.Local).AddTicks(5094),
                             DeletedBy = "",
-                            Departure = 0,
-                            Destination = 0,
-                            FlightCategories = 0,
                             IsDeleted = false,
                             ModifiedBy = "",
-                            Number_of_Passanger = 2,
-                            TicketName = "Oluwaseyi Kolawole",
-                            TravelersAge = 0,
-                            TripType = 0,
-                            UpdatedOn = new DateTime(2023, 2, 14, 12, 2, 54, 890, DateTimeKind.Local).AddTicks(787)
-                        },
+                            Name = "Mustapha Lateefat",
+                            PhoneNumber = "08084491078"
+                        });
+                });
+
+            modelBuilder.Entity("MASFlightBooking.Domain.Models.PassangerDetails", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DeletedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("MaturityLevel")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ModifiedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("NextOfKinId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NextOfKinId");
+
+                    b.ToTable("PassangerDetails");
+
+                    b.HasData(
                         new
                         {
                             Id = new Guid("923a643a-9c41-464e-9fe3-29656c34e589"),
-                            Airline = 4,
+                            Address = "Abule egba ",
                             CreatedBy = "",
-                            CreatedOn = new DateTime(2023, 2, 14, 12, 2, 54, 890, DateTimeKind.Local).AddTicks(797),
+                            CreatedOn = new DateTime(2023, 2, 14, 23, 26, 27, 363, DateTimeKind.Local).AddTicks(5015),
                             DeletedBy = "",
-                            Departure = 0,
-                            Destination = 0,
-                            FlightCategories = 0,
+                            Email = "ayisatabiodun@gmail.com",
                             IsDeleted = false,
+                            MaturityLevel = 0,
                             ModifiedBy = "",
-                            Number_of_Passanger = 3,
-                            TicketName = "Bolu Adefalu",
-                            TravelersAge = 0,
-                            TripType = 0,
-                            UpdatedOn = new DateTime(2023, 2, 14, 12, 2, 54, 890, DateTimeKind.Local).AddTicks(801)
+                            Name = "Mustapha Akeem",
+                            NextOfKinId = new Guid("0ffe12ec-ea61-4e47-8a5c-e753a5fe2823"),
+                            PhoneNumber = "08084491078"
                         });
                 });
 
@@ -419,6 +631,44 @@ namespace MASFlightBooking.Domain.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens", (string)null);
+                });
+
+            modelBuilder.Entity("MASFlightBooking.Domain.Models.MASFlightBookingModel", b =>
+                {
+                    b.HasOne("MASFlightBooking.Domain.Models.Airlines", "Airline")
+                        .WithMany()
+                        .HasForeignKey("AirlineId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MASFlightBooking.Domain.Models.FlightCategory", "FlightCategory")
+                        .WithMany()
+                        .HasForeignKey("FlightCategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MASFlightBooking.Domain.Models.PassangerDetails", "PassangerInfo")
+                        .WithMany()
+                        .HasForeignKey("PassangerInfoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Airline");
+
+                    b.Navigation("FlightCategory");
+
+                    b.Navigation("PassangerInfo");
+                });
+
+            modelBuilder.Entity("MASFlightBooking.Domain.Models.PassangerDetails", b =>
+                {
+                    b.HasOne("MASFlightBooking.Domain.Models.NextofKin", "NextofKin")
+                        .WithMany()
+                        .HasForeignKey("NextOfKinId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("NextofKin");
                 });
 
             modelBuilder.Entity("MASFlightBooking.Domain.Models.UserIdentityModel+AppRoleClaim", b =>

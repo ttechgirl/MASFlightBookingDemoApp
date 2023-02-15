@@ -1,4 +1,5 @@
-﻿using MASFlightBooking.Domain.Models;
+﻿using MASFlightBooking.DataAccess.Dtos;
+using MASFlightBooking.Domain.Models;
 using MASFlightBooking.Domain.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -10,12 +11,11 @@ namespace MASFlightBooking.DataAccess.Services.Interfaces
 {
     public interface IMASFlightInterface
     {
-        Task<IEnumerable<MASFlightBookingModel>> GetAllFlight();
-        Task<MASFlightBookingModel> GetSingleFlight(Guid Id);
-        Task<MASFlightBookingModel> BuyFlight_Ticket(MASFlightBookingModel masflight);
-        Task<MASFlightBookingModel> UpdateFlight_Details(MASFlightBookingModel masflight);
-        void Revoke_Flight(long BookingId);
-        Task<MASFlightBookingModel>CreateBooking(MASFlightViewModel model);
+        Task<IEnumerable<MASFlightBookingDto>> GetAllFlight();
+        Task<MASFlightBookingDto> GetSingleFlight(Guid Id);
+        Task<MASFlightBookingViewModel> CreateBooking(MASFlightBookingModel model);
+        Task<MASFlightBookingViewModel> UpdateFlight(MASFlightBookingViewModel masflight);
+        void Revoke_Flight(Guid Id);
     
     
     

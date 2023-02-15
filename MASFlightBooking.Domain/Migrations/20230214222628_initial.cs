@@ -10,6 +10,26 @@ namespace MASFlightBooking.Domain.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "Airlines",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Status = table.Column<int>(type: "int", nullable: false),
+                    AirlineName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DeletedBy = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    DeletedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Airlines", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetRoles",
                 columns: table => new
                 {
@@ -75,20 +95,13 @@ namespace MASFlightBooking.Domain.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "MASFlights",
+                name: "FlightCategory",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    TicketName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    MobileNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Number_of_passanger = table.Column<int>(type: "int", nullable: false),
-                    Airline = table.Column<int>(type: "int", nullable: false),
-                    Departure = table.Column<int>(type: "int", nullable: false),
-                    Destination = table.Column<int>(type: "int", nullable: false),
-                    FlightCategories = table.Column<int>(type: "int", nullable: false),
-                    TravelerAge = table.Column<int>(type: "int", nullable: false),
-                    TripType = table.Column<int>(type: "int", nullable: false),
-                    UpdatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Status = table.Column<int>(type: "int", nullable: false),
+                    AmountPerSeat = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    Category = table.Column<int>(type: "int", nullable: false),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -99,7 +112,29 @@ namespace MASFlightBooking.Domain.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_MASFlights", x => x.Id);
+                    table.PrimaryKey("PK_FlightCategory", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "NextofKin",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Relationhsip = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DeletedBy = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    DeletedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_NextofKin", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -209,6 +244,106 @@ namespace MASFlightBooking.Domain.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "PassangerDetails",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NextOfKinId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    MaturityLevel = table.Column<int>(type: "int", nullable: false),
+                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DeletedBy = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    DeletedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PassangerDetails", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_PassangerDetails_NextofKin_NextOfKinId",
+                        column: x => x.NextOfKinId,
+                        principalTable: "NextofKin",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "MASFlights",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    PassangerInfoId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    AirlineId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Departure = table.Column<int>(type: "int", nullable: false),
+                    Destination = table.Column<int>(type: "int", nullable: false),
+                    FlightCategoryId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    TripType = table.Column<int>(type: "int", nullable: false),
+                    BookedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    FlightTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    TotalCost = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DeletedBy = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    DeletedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_MASFlights", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_MASFlights_Airlines_AirlineId",
+                        column: x => x.AirlineId,
+                        principalTable: "Airlines",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_MASFlights_FlightCategory_FlightCategoryId",
+                        column: x => x.FlightCategoryId,
+                        principalTable: "FlightCategory",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_MASFlights_PassangerDetails_PassangerInfoId",
+                        column: x => x.PassangerInfoId,
+                        principalTable: "PassangerDetails",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.InsertData(
+                table: "Airlines",
+                columns: new[] { "Id", "AirlineName", "CreatedBy", "CreatedOn", "DeletedBy", "DeletedOn", "IsDeleted", "ModifiedBy", "ModifiedOn", "Status" },
+                values: new object[] { new Guid("6c7e9c5d-89ae-43d9-8f19-feb71af65e8f"), "Dana_Air", "", new DateTime(2023, 2, 14, 23, 26, 27, 363, DateTimeKind.Local).AddTicks(4916), "", null, false, "", null, 1 });
+
+            migrationBuilder.InsertData(
+                table: "FlightCategory",
+                columns: new[] { "Id", "AmountPerSeat", "Category", "CreatedBy", "CreatedOn", "DeletedBy", "DeletedOn", "IsDeleted", "ModifiedBy", "ModifiedOn", "Status" },
+                values: new object[] { new Guid("73c5bcba-65b6-46a3-897f-7d67fc0480b8"), 50000m, 3, "", new DateTime(2023, 2, 14, 23, 26, 27, 363, DateTimeKind.Local).AddTicks(5169), "", null, false, "", null, 1 });
+
+            migrationBuilder.InsertData(
+                table: "NextofKin",
+                columns: new[] { "Id", "Address", "CreatedBy", "CreatedOn", "DeletedBy", "DeletedOn", "IsDeleted", "ModifiedBy", "ModifiedOn", "Name", "PhoneNumber", "Relationhsip" },
+                values: new object[] { new Guid("0ffe12ec-ea61-4e47-8a5c-e753a5fe2823"), "Abule egba ", "", new DateTime(2023, 2, 14, 23, 26, 27, 363, DateTimeKind.Local).AddTicks(5094), "", null, false, "", null, "Mustapha Lateefat", "08084491078", null });
+
+            migrationBuilder.InsertData(
+                table: "PassangerDetails",
+                columns: new[] { "Id", "Address", "CreatedBy", "CreatedOn", "DeletedBy", "DeletedOn", "Email", "IsDeleted", "MaturityLevel", "ModifiedBy", "ModifiedOn", "Name", "NextOfKinId", "PhoneNumber" },
+                values: new object[] { new Guid("923a643a-9c41-464e-9fe3-29656c34e589"), "Abule egba ", "", new DateTime(2023, 2, 14, 23, 26, 27, 363, DateTimeKind.Local).AddTicks(5015), "", null, "ayisatabiodun@gmail.com", false, 0, "", null, "Mustapha Akeem", new Guid("0ffe12ec-ea61-4e47-8a5c-e753a5fe2823"), "08084491078" });
+
+            migrationBuilder.InsertData(
+                table: "MASFlights",
+                columns: new[] { "Id", "AirlineId", "BookedDate", "CreatedBy", "CreatedOn", "DeletedBy", "DeletedOn", "Departure", "Destination", "FlightCategoryId", "FlightTime", "IsDeleted", "ModifiedBy", "ModifiedOn", "PassangerInfoId", "TotalCost", "TripType" },
+                values: new object[] { new Guid("43738933-acf0-4479-8624-0ef1bec0383d"), new Guid("6c7e9c5d-89ae-43d9-8f19-feb71af65e8f"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "", new DateTime(2023, 2, 14, 23, 26, 27, 363, DateTimeKind.Local).AddTicks(4394), "", null, 0, 0, new Guid("73c5bcba-65b6-46a3-897f-7d67fc0480b8"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false, "", null, new Guid("923a643a-9c41-464e-9fe3-29656c34e589"), 0m, 0 });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -247,6 +382,26 @@ namespace MASFlightBooking.Domain.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_MASFlights_AirlineId",
+                table: "MASFlights",
+                column: "AirlineId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_MASFlights_FlightCategoryId",
+                table: "MASFlights",
+                column: "FlightCategoryId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_MASFlights_PassangerInfoId",
+                table: "MASFlights",
+                column: "PassangerInfoId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PassangerDetails_NextOfKinId",
+                table: "PassangerDetails",
+                column: "NextOfKinId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -274,6 +429,18 @@ namespace MASFlightBooking.Domain.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Airlines");
+
+            migrationBuilder.DropTable(
+                name: "FlightCategory");
+
+            migrationBuilder.DropTable(
+                name: "PassangerDetails");
+
+            migrationBuilder.DropTable(
+                name: "NextofKin");
         }
     }
 }

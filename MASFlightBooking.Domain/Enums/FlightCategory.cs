@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MASFlightBooking.Domain.Enums
 {
-    public enum FlightCategories
+    public enum FlightCategory
     {
         Economy,
         Premium,

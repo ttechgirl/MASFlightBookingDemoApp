@@ -25,9 +25,9 @@ namespace MASFlightBooking.WebAPI.Controllers
         }
        
         [HttpGet("GetAllFlights")]
-        public IActionResult GetList()
+        public async Task<IActionResult> GetList()
         {
-            var allflights = _masFlightInterface.GetAllFlight();
+            var allflights = await _masFlightInterface.GetAllFlight();
             if(allflights == null)
             {
                 return NotFound();
@@ -36,9 +36,9 @@ namespace MASFlightBooking.WebAPI.Controllers
         }
 
         [HttpGet("Get_Single_Flight")]
-        public IActionResult GetSingleFlight(Guid Id)
+        public async Task<IActionResult> GetSingleFlight(Guid Id)
         {
-            var allflights = _masFlightInterface.GetSingleFlight(Id);    
+            var allflights = await _masFlightInterface.GetSingleFlight(Id);    
             if(allflights != null)
             {
                 return Ok(allflights);
@@ -48,7 +48,7 @@ namespace MASFlightBooking.WebAPI.Controllers
 
         }
         [HttpPost("Buy_Flight_Ticket")]
-        public IActionResult BuyTicket(MASFlightBookingModel masflight)
+        public IActionResult BuyTicket(MASFlightBookingModel model)
         {
 
             totalAmount = Number_of_Passanger * Amount_per_seat;
@@ -70,14 +70,14 @@ namespace MASFlightBooking.WebAPI.Controllers
                 customer = new Customer()
 
             };
-            var purchase = _masFlightInterface.BuyFlight_Ticket(masflight);
-            if (purchase.IsCompleted == true)
-            {
-                var request = _paymentInterface.InitiatePayment(sendPaymentData).Result;
-                response.Success = true;
-                response.Message = "Flight ticket successfully purchased";
+            var purchase = _masFlightInterface.CreateBooking(model);
+            //if (purchase.IsCompleted == true)
+            //{
+            //    var request = _paymentInterface.InitiatePayment(sendPaymentData).Result;
+            //    response.Success = true;
+            //    response.Message = "Flight ticket successfully purchased";
 
-            }
+            //}
             return BadRequest();
 
 
