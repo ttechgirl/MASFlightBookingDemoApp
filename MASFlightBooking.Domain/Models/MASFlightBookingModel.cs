@@ -17,12 +17,20 @@ namespace MASFlightBooking.Domain.Models
         public Departure Departure { get; set; }
         public Destination Destination { get; set; }
         public TripType TripType { get; set; }
+
+        //[ForeignKey("PassangerInfo")]
         public Guid PassangerInfoId { get; set; }
         public PassangerInfoModel? PassangerInfo { get; set; }
+
+        //[ForeignKey("FlightCategory")]
         public Guid FlightCategoryId { get; set; }
         public FlightCategoryModel? FlightCategory { get; set; }
-        public AirlineModel? Airline { get; set; }
+
+        //[ForeignKey("Airline")]
         public Guid AirlineId { get; set; }
+        public AirlineModel? Airline{ get; set; }
+
+        
 
         //public int NumberOfPassanger { get; set; }
         //collection for multiple passangers 

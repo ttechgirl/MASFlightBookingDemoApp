@@ -1,4 +1,5 @@
 ﻿using MASFlightBooking.Domain.Enums;
+using MASFlightBooking.Domain.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +18,7 @@ namespace MASFlightBooking.Domain.Models
         public NextOfKin? NextOfKin { get; set; }
         public TravelerAge MaturityLevel{ get; set; }
 
-
+       
     }
 
 

@@ -1,4 +1,5 @@
 ﻿using MASFlightBooking.Domain.Enums;
+using MASFlightBooking.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,8 +10,33 @@ namespace MASFlightBooking.Domain.ViewModels
 {
     public class AirlineViewModel
     {
-        public Airline Airline { get; set; }
+        public Airlines Airline { get; set; }
         public Status Status { get; set; }
+
+
+
+
+        public static explicit operator AirlineViewModel(AirlineModel source)
+        {
+            var destination = new AirlineViewModel();
+            destination.Status = source.Status;
+            destination.Airline = source.Airline;
+
+            return destination;
+        }
+
+
+        public static explicit operator AirlineModel(AirlineViewModel source)
+        {
+            var destination = new AirlineModel();
+            destination.Status = source.Status;
+            destination.Airline = source.Airline;
+
+            return destination;
+
+
+
+        }
 
     }
 }

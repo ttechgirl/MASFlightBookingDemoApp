@@ -19,6 +19,9 @@ namespace MASFlightBooking.Domain.Context
         { }
 
         public DbSet<MASFlightBookingModel> MASFlights { get; set; }
+        public DbSet<AirlineModel> Airlines { get; set; }
+        public DbSet<FlightCategoryModel> FlightCategories { get; set; }
+        public DbSet<PassangerInfoModel> PassangerInfos { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

@@ -16,9 +16,12 @@ namespace MASFlightBooking.DataAccess.Services.Repositories
     public class MASFlightRepository : IMASFlightInterface
     {
         private MASFlightDbContext _appflightDbContext;
-        public MASFlightRepository(MASFlightDbContext flightDbContext)
+        private readonly IPaymentInterface _paymentInterface;
+
+        public MASFlightRepository(MASFlightDbContext flightDbContext, IPaymentInterface paymentInterface)
         {
             _appflightDbContext = flightDbContext;
+            _paymentInterface = paymentInterface;
         }
 
         public async Task<IEnumerable<MASFlightBookingDto>> GetAllFlight()
@@ -45,28 +48,50 @@ namespace MASFlightBooking.DataAccess.Services.Repositories
 
         
 
-        public Task<MASFlightBookingViewModel> CreateBooking(MASFlightBookingModel model)
+        public async Task<MASFlightBookingViewModel> CreateBooking(CreateBookingViewModel model)
         {
-            var flight = model.Mapp2();
-            var result =  _appflightDbContext.MASFlights.AddAsync(flight);
+
+            if (model == null)
+            {
+                return null;
+            }
+            
+            var rand = new Random();
+            int tranId = rand.Next(1000);
+            var tx_ref = $"Flight-{tranId}-{DateTime.Now}";
+
+            var sendPaymentData = new PaymentRequestModel()
+            {
+                    
+                redirect_url = "http://localhost:4001",
+                tx_ref = tx_ref,
+                amount = 40000,
+                currency = "NGN",
+                payment_options = "card",
+                customer = new Customer()
+                {
+                    email = model.PassangerInfo.Email,
+                    name = model.PassangerInfo.Name,
+                    phonenumber = model.PassangerInfo.PhoneNumber
+
+                },
+
+            };
+                
+            var request = await _paymentInterface.InitiatePayment(sendPaymentData);
+
+            var response = (MASFlightBookingViewModel)model;
+            model.Message = request.data.link;
+            var buyTicket = (MASFlightBookingModel)model;
+
+
+            await _appflightDbContext.MASFlights.AddAsync(buyTicket);
+
             await _appflightDbContext.SaveChangesAsync();
 
 
-            var buyTicket = new MASFlightBookingModel()
-            {
-                //TicketName = masflight.TicketName,
-                //Number_of_Passanger = masflight.Number_of_Passanger,
-                //Destination = masflight.Destination,
-                //Departure = masflight.Departure,
-                //TripType = masflight.TripType,
-                //FlightCategories = masflight.FlightCategories,
-                //TravelersAge = masflight.TravelersAge,
-                //Airline = masflight.Airline
+            return response;
 
-            };
-            return result
-
-            throw new NotImplementedException();
         }
 
         public Task<MASFlightBookingViewModel> UpdateFlight(MASFlightBookingViewModel masflight)

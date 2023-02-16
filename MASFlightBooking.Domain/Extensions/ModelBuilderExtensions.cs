@@ -16,8 +16,9 @@ namespace MASFlightBooking.Domain.Extensions
             builder.Entity<MASFlightBookingModel>().HasData(
                 new MASFlightBookingModel
                 {
+                    //foreign key
                     Id = Guid.Parse("43738933-acf0-4479-8624-0ef1bec0383d"),
-                    AirlineId = Guid.Parse("6c7e9c5d-89ae-43d9-8f19-feb71af65e8f"), //foreign key
+                    AirlineId = Guid.Parse("6c7e9c5d-89ae-43d9-8f19-feb71af65e8f"),
                     PassangerInfoId = Guid.Parse("923a643a-9c41-464e-9fe3-29656c34e589"),
                     FlightCategoryId = Guid.Parse("73c5bcba-65b6-46a3-897f-7d67fc0480b8")
 
@@ -63,7 +64,7 @@ namespace MASFlightBooking.Domain.Extensions
                     Id = Guid.Parse("73c5bcba-65b6-46a3-897f-7d67fc0480b8"),
                     Status = Status.Available,
                     AmountPerSeat = 50000,
-                    Category = FlightCategory.Business
+                    FlightCategory = FlightCategory.Business
 
                 });
 

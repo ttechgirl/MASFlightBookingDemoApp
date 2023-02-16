@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MASFlightBooking.Domain.Enums
 {
-    public enum Airline
+    public enum Airlines
     {
         Dana_Air,
         IRS,

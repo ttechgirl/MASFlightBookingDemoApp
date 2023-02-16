@@ -11,7 +11,7 @@ namespace MASFlightBooking.Domain.Models
     {
         public Status Status { get; set; }
         public decimal? AmountPerSeat { get; set; }
-        public FlightCategory Category { get; set; }
+        public FlightCategory FlightCategory { get; set; }
         
     }
 }

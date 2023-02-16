@@ -13,7 +13,7 @@ namespace MASFlightBooking.DataAccess
     {
         public static MASFlightBookingModel Map(this MASFlightBookingDto model)
         {
-            if(model == null)
+            if (model == null)
             {
                 return null;
             }
@@ -30,9 +30,9 @@ namespace MASFlightBooking.DataAccess
                 BookedDate = model.BookedDate,
                 FlightTime = model.FlightTime,
                 TotalCost = model.TotalCost,
-                
+
             };
-        
+
         }
 
 
@@ -54,7 +54,7 @@ namespace MASFlightBooking.DataAccess
                 TripType = entity.TripType,
                 BookedDate = entity.BookedDate,
                 FlightTime = entity.FlightTime,
-                TotalCost = entity.TotalCost, 
+                TotalCost = entity.TotalCost,
 
             };
 
@@ -73,7 +73,7 @@ namespace MASFlightBooking.DataAccess
                 PhoneNumber = model.PhoneNumber,
                 Email = model.Email,
                 Address = model.Address,
-               // NextofKin = new NextofKin
+                // NextofKin = new NextofKin
                 NextOfKinId = model.NextOfKinId,
                 MaturityLevel = model.MaturityLevel
             };
@@ -100,151 +100,8 @@ namespace MASFlightBooking.DataAccess
 
         }
 
-        //public static AirlineViewModel Map(this MASFlightBookingModel model)
-        //{
-        //    if (model == null)
-        //    {
-        //        return null;
-        //    }
-        //    return new AirlineViewModel
-        //    {
-
-        //    };
-
-        //}
-
-        //public static MASFlightBookingModel Map1(this AirlineViewModel entity)
-        //{
-        //    if (entity == null)
-        //    {
-        //        return null;
-        //    }
-        //    return new MASFlightBookingModel
-        //    {
-
-        //    };
-
-        //}
-
-        public static MASFlightBookingViewModel Map(this MASFlightBookingModel model)
-        {
-            if (model == null)
-            {
-                return null;
-            }
-            return new MASFlightBookingViewModel
-            {
-                PassangerInfo = model.PassangerInfo,
-                Departure = model.Departure,
-                Destination = model.Destination,
-                TripType = model.TripType,
-                BookedDate = model.BookedDate,
-                FlightTime = model.FlightTime,
-
-            };
-
-        }
-
-        public static MASFlightBookingModel Map(this MASFlightBookingViewModel entity)
-        {
-            if (entity == null)
-            {
-                return null;
-            }
-            return new MASFlightBookingModel
-            {
-                PassangerInfo = entity.PassangerInfo,
-                Departure = entity.Departure,
-                Destination = entity.Destination,
-                TripType = entity.TripType,
-                BookedDate = entity.BookedDate,
-                FlightTime = entity.FlightTime,
-
-            };
-
-        }
-
-
-        //public static FlightCategoryViewModel Mapp3(this MASFlightBookingModel model)
-        //{
-        //    if (model == null)
-        //    {
-        //        return null;
-        //    }
-        //    return new FlightCategoryViewModel
-        //    {
-        //        FlightCategory = 
-
-
-        //    };
-
-        //}
-
-        //public static MASFlightBookingModel Map3(this FlightCategoryViewModel entity)
-        //{
-        //    if (entity == null)
-        //    {
-        //        return null;
-        //    }
-        //    return new MASFlightBookingModel
-        //    {
-
-        //    };
-
-        //}
-
-
-        //public static PassangerInfoViewModel Mapp4(this MASFlightBookingModel model)
-        //{
-        //    if (model == null)
-        //    {
-        //        return null;
-        //    }
-        //    return new PassangerInfoViewModel
-        //    {
-        //        Name = model.Name,
-        //        PhoneNumber = model.PhoneNumber,
-        //        Email = model.Email,
-        //        Address = model.Address,
-        //        MaturityLevel = model.MaturityLevel
-        //    };
-
-        //}
-
-        //public static MASFlightBookingModel Map4(this PassangerInfoViewModel entity)
-        //{
-        //    if (entity == null)
-        //    {
-        //        return null;
-        //    }
-        //    return new MASFlightBookingModel
-        //    {
-        //        PassangerInfo = entity.Name,
-        //    };
-
-        //}
-
-
-
-        //public static NextOfKin Map(this NextOfKinDto model)
-        //{
-        //    if (model == null)
-        //    {
-        //        return null;
-        //    }
-        //    //return new PassangerDetails
-        //    //{
-        //    //    Id = model.Id,
-        //    //    Name = model.Name,
-        //    //    PhoneNumber = model.PhoneNumber,
-        //    //    Address = model.Address,
-        //    //    // NextofKin = new NextofKin
-        //    //    NextOfKinId = model.NextOfKinId,
-        //    //    MaturityLevel = model.MaturityLevel
-        //    //};
-
-        //}
 
     }
+       
 }
 

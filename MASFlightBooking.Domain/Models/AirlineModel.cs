@@ -12,7 +12,7 @@ namespace MASFlightBooking.Domain.Models
 
         public Status Status { get; set; }
         public string? AirlineName { get; set;}
-        public Airline Airline { get; set; }
+        public Airlines Airline { get; set; }
 
     }
 }
