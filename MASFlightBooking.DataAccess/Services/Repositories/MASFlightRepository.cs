@@ -81,7 +81,7 @@ namespace MASFlightBooking.DataAccess.Services.Repositories
             var request = await _paymentInterface.InitiatePayment(sendPaymentData);
 
             var response = (MASFlightBookingViewModel)model;
-            model.Message = request.data.link;
+            response.PaymentUrl = request.data.link;
             var buyTicket = (MASFlightBookingModel)model;
 
 

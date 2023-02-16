@@ -54,7 +54,6 @@ namespace MASFlightBooking.WebAPI.Controllers
                 var purchase = await _masFlightInterface.CreateBooking(model);
 
                 return Ok(purchase);
-                model.Message = "Flight successfully booked";
             }
             catch (Exception ex)
             {

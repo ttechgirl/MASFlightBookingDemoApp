@@ -16,6 +16,7 @@ namespace MASFlightBooking.Domain.ViewModels
         public Departure Departure { get; set; }
         public Destination Destination { get; set; }
         public TripType TripType { get; set; }
+        public string? PaymentUrl { get; set; }
 
         //explicit conversion
         public static explicit operator MASFlightBookingViewModel(MASFlightBookingModel source)
@@ -43,10 +44,10 @@ namespace MASFlightBooking.Domain.ViewModels
             return destination;
         }
 
-
+        
     }
 
-    public class CreateBookingViewModel : ResponseViewModel
+    public class CreateBookingViewModel 
     {
         public PassangerInfoViewModel? PassangerInfo { get; set; }
         public DateTime BookedDate { get; set; }
