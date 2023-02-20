@@ -22,7 +22,7 @@ namespace MASFlightBooking.Domain.Context
         public DbSet<AirlineModel> Airlines { get; set; }
         public DbSet<FlightCategoryModel> FlightCategories { get; set; }
         public DbSet<PassangerInfoModel> PassangerInfos { get; set; }
-
+        public DbSet<NextOfKin> NextOfKin { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
            base.OnModelCreating(builder);

@@ -55,7 +55,16 @@ namespace MASFlightBooking.DataAccess.Services.Repositories
             {
                 return null;
             }
-            
+
+            //available airline validation
+            if (model.AirlineId == null )
+            {
+                //list of errors in MASBookingViewModel
+                return default;
+            }
+            //available flight category validation
+
+
             var rand = new Random();
             int tranId = rand.Next(1000);
             var tx_ref = $"Flight-{tranId}-{DateTime.Now}";
@@ -81,7 +90,7 @@ namespace MASFlightBooking.DataAccess.Services.Repositories
             var request = await _paymentInterface.InitiatePayment(sendPaymentData);
 
             var response = (MASFlightBookingViewModel)model;
-            model.Message = request.data.link;
+            response.RedirectUrl = request.data.link;
             var buyTicket = (MASFlightBookingModel)model;
 
 
@@ -94,9 +103,36 @@ namespace MASFlightBooking.DataAccess.Services.Repositories
 
         }
 
-        public Task<MASFlightBookingViewModel> UpdateFlight(MASFlightBookingViewModel masflight)
+        public async Task<bool> UpdateFlight(CreateBookingViewModel masflight)
         {
-            throw new NotImplementedException();
+            var updatedTicket = await _appflightDbContext.MASFlights
+                .Include(p => p.PassangerInfo)
+                .Include(q => q.PassangerInfo.NextOfKin)
+                .FirstOrDefaultAsync(x => x.Id == masflight.Id);
+            if (updatedTicket == null)
+            {
+                return false;
+            }
+
+            updatedTicket.AirlineId = masflight.AirlineId;
+            updatedTicket.FlightCategoryId = masflight.FlightCategoryId;
+            updatedTicket.Departure = masflight.Departure;
+            updatedTicket.Destination = masflight.Destination;
+            updatedTicket.TripType = masflight.TripType;
+            updatedTicket.BookedDate = masflight.BookedDate;
+            updatedTicket.FlightTime = masflight.FlightTime;
+            updatedTicket.PassangerInfo.Name = masflight.PassangerInfo.Name;
+            updatedTicket.PassangerInfo.PhoneNumber = masflight.PassangerInfo.PhoneNumber;
+            updatedTicket.PassangerInfo.Email = masflight.PassangerInfo.Email;
+            updatedTicket.PassangerInfo.Address = masflight.PassangerInfo.Address;
+            updatedTicket.ModifiedOn = DateTime.Now;
+            updatedTicket.PassangerInfo.ModifiedOn = DateTime.Now;
+            updatedTicket.PassangerInfo.NextOfKin.ModifiedOn = DateTime.Now;
+            updatedTicket.PassangerInfo.NextOfKin.Address = masflight.PassangerInfo.NextOfKin.Address;
+            updatedTicket.PassangerInfo.NextOfKin.Name = masflight.PassangerInfo.NextOfKin.Name;
+            updatedTicket.PassangerInfo.NextOfKin.PhoneNumber = masflight.PassangerInfo.NextOfKin.PhoneNumber;
+            await _appflightDbContext.SaveChangesAsync();
+            return true;
         }
 
         public void Revoke_Flight(Guid Id)

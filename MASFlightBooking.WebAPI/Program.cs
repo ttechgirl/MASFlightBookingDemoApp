@@ -15,7 +15,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 //Add services to the container.
 
-builder.Services.AddScoped<IMASFlightInterface, MASFlightRepository>();
+builder.Services.AddTransient<IMASFlightInterface, MASFlightRepository>();
 builder.Services.AddScoped<IPaymentInterface, PaymentRepository>();
 builder.Services.AddScoped<IUserInterface, UserRepository>();
 builder.Services.AddDbContext<MASFlightDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("ConnectToDB")));

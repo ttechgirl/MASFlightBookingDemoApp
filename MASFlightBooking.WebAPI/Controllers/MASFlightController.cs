@@ -54,7 +54,7 @@ namespace MASFlightBooking.WebAPI.Controllers
                 var purchase = await _masFlightInterface.CreateBooking(model);
 
                 return Ok(purchase);
-                model.Message = "Flight successfully booked";
+                //model.Message = "Flight successfully booked";
             }
             catch (Exception ex)
             {
@@ -65,6 +65,12 @@ namespace MASFlightBooking.WebAPI.Controllers
 
         }
 
+        [HttpPut("update")]
+        public async Task<IActionResult>  EditBooking(CreateBookingViewModel model)
+        {
+                 await _masFlightInterface.UpdateFlight(model);
+                return Ok("Dey play");
+        }
 
     }
 }

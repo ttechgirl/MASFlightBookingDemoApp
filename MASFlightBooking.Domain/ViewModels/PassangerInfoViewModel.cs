@@ -15,6 +15,7 @@ namespace MASFlightBooking.Domain.ViewModels
         public string? Email { get; set; }
         public string? Address { get; set; }
         public NextOfKinViewModel? NextOfKin { get; set; }
+        public Guid NextOfKinId { get; set; }
         public TravelerAge MaturityLevel { get; set; }
 
 
@@ -29,6 +30,7 @@ namespace MASFlightBooking.Domain.ViewModels
             destination.Email = source.Email;
             destination.Address = source.Address;
             destination.NextOfKin = (NextOfKinViewModel?)source.NextOfKin;
+            destination.NextOfKinId = source.NextOfKinId;
             return destination;
         }
 
@@ -41,6 +43,7 @@ namespace MASFlightBooking.Domain.ViewModels
             destination.Email = source.Email;
             destination.Address = source.Address;
             destination.NextOfKin = (NextOfKin?)source.NextOfKin;
+            destination.NextOfKinId = source.NextOfKinId;
             return destination;
 
 
