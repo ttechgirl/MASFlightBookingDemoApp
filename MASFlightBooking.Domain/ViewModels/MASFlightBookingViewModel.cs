@@ -17,6 +17,7 @@ namespace MASFlightBooking.Domain.ViewModels
         public Destination Destination { get; set; }
         public TripType TripType { get; set; }
         public string? PaymentUrl { get; set; }
+        
 
         //explicit conversion
         public static explicit operator MASFlightBookingViewModel(MASFlightBookingModel source)
@@ -49,35 +50,44 @@ namespace MASFlightBooking.Domain.ViewModels
 
     public class CreateBookingViewModel 
     {
+        public Guid Id { get; set; }
         public PassangerInfoViewModel? PassangerInfo { get; set; }
         public DateTime BookedDate { get; set; }
         public DateTime FlightTime { get; set; }
         public Departure Departure { get; set; }
         public Destination Destination { get; set; }
         public TripType TripType { get; set; }
+        public Guid AirlineId { get; set; }
+        public Guid FlightCategoryId { get; set; }
+        
 
         //explicit conversion
         public static explicit operator CreateBookingViewModel(MASFlightBookingModel source)
         {
             var destination = new CreateBookingViewModel();
+            destination.Id = source.Id;
             destination.PassangerInfo = (PassangerInfoViewModel?)source.PassangerInfo;
             destination.BookedDate = source.BookedDate;
             destination.FlightTime = source.FlightTime;
             destination.Departure = source.Departure;
             destination.Destination = source.Destination;
             destination.TripType = source.TripType;
+           
             return destination;
         }
 
         public static explicit operator MASFlightBookingModel(CreateBookingViewModel source)
         {
             var destination = new MASFlightBookingModel();
+            destination.Id = source.Id;
             destination.PassangerInfo = (PassangerInfoModel?)source.PassangerInfo;
             destination.BookedDate = source.BookedDate;
             destination.FlightTime = source.FlightTime;
             destination.Departure = source.Departure;
             destination.Destination = source.Destination;
             destination.TripType = source.TripType;
+            destination.AirlineId = source.AirlineId;
+            destination.FlightCategoryId = source.FlightCategoryId;
             return destination;
         }
 
@@ -90,6 +100,7 @@ namespace MASFlightBooking.Domain.ViewModels
             destination.Departure = source.Departure;
             destination.Destination = source.Destination;
             destination.TripType = source.TripType;
+
             return destination;
         }
 

@@ -29,9 +29,52 @@ namespace MASFlightBooking.Domain.Extensions
                 {
                     Id = Guid.Parse("6c7e9c5d-89ae-43d9-8f19-feb71af65e8f"),
                     Status = Status.Available,
-                    AirlineName = "Dana_Air"
+                    AirlineName = "Dana Air",
+                    Airline = Airlines.Dana_Air,
+                   
 
                 });
+
+            builder.Entity<AirlineModel>().HasData(
+               new AirlineModel
+               {
+                   Id = Guid.Parse("6283d2df-ca2c-4d6f-bd2d-5cf48d317345"),
+                   Status = Status.Unavailable,
+                   AirlineName = "Air France",
+                   Airline = Airlines.Air_France,
+
+               });
+
+            builder.Entity<AirlineModel>().HasData(
+              new AirlineModel
+              {
+                  Id = Guid.Parse("cae5c97e-a07c-4656-9fa9-c6b8feb19019"),
+                  Status = Status.Available,
+                  AirlineName = "IRS",
+                  Airline = Airlines.IRS,
+
+              });
+
+            builder.Entity<AirlineModel>().HasData(
+            new AirlineModel
+            {
+                Id = Guid.Parse("14cf20ec-4426-4059-960e-9c42f8b19e9e"),
+                Status = Status.Available,
+                AirlineName = "MAS AIr",
+                Airline = Airlines.Mas_Air,
+
+            });
+            builder.Entity<AirlineModel>().HasData(
+            new AirlineModel
+            {
+                Id = Guid.Parse("62f8ab72-f871-4add-ae73-3f9b5b22d329"),
+                Status = Status.Available,
+                AirlineName = "Ibom AIr",
+                Airline = Airlines.Ibom_Air,
+
+            });
+
+
 
             builder.Entity<PassangerInfoModel>().HasData(
                 new PassangerInfoModel
@@ -63,10 +106,45 @@ namespace MASFlightBooking.Domain.Extensions
                 {
                     Id = Guid.Parse("73c5bcba-65b6-46a3-897f-7d67fc0480b8"),
                     Status = Status.Available,
-                    AmountPerSeat = 50000,
-                    FlightCategory = FlightCategory.Business
+                    AmountPerSeat = 50000.5,
+                    FlightCategory = FlightCategory.Business,
+                    CategoryName = "Business"
 
                 });
+
+            builder.Entity<FlightCategoryModel>().HasData(
+                new FlightCategoryModel
+                {
+                    Id = Guid.Parse("f551bb7b-617b-4e56-9a7a-54358b4b9d38"),
+                    Status = Status.Available,
+                    AmountPerSeat = 123000.5,
+                    FlightCategory = FlightCategory.Premium,
+                    CategoryName = "Premium"
+
+                });
+
+            builder.Entity<FlightCategoryModel>().HasData(
+                 new FlightCategoryModel
+                 {
+                     Id = Guid.Parse("759b4322-8282-4758-8479-db06b6d4030c"),
+                     Status = Status.Available,
+                     AmountPerSeat = 35800.5,
+                     FlightCategory = FlightCategory.Economy,
+                     CategoryName = "Economy"
+
+                 });
+
+            builder.Entity<FlightCategoryModel>().HasData(
+                new FlightCategoryModel
+                {
+                    Id = Guid.Parse("185337b9-474e-49ae-8eff-f8ac0e4c65f7"),
+                    Status = Status.Available,
+                    AmountPerSeat = 210000.5,
+                    FlightCategory = FlightCategory.FirstClass,
+                    CategoryName = "First Class"
+
+                });
+
 
 
         }

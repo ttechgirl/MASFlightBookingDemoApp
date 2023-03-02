@@ -14,8 +14,8 @@ namespace MASFlightBooking.DataAccess.Services.Interfaces
         Task<IEnumerable<MASFlightBookingDto>> GetAllFlight();
         Task<MASFlightBookingDto> GetSingleFlight(Guid Id);
         Task<MASFlightBookingViewModel> CreateBooking(CreateBookingViewModel model);
-        Task<MASFlightBookingViewModel> UpdateFlight(MASFlightBookingViewModel masflight);
-        void Revoke_Flight(Guid Id);
+        Task<bool> UpdateFlight(CreateBookingViewModel masflight);
+         void DeleteBooking(Guid Id);
     
     
     

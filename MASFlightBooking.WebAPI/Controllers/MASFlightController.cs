@@ -42,28 +42,52 @@ namespace MASFlightBooking.WebAPI.Controllers
                 return Ok(allflights);
 
             }
-            return NotFound(Id);
+            return NotFound("Input correct Id");
 
         }
+
         [HttpPost("Book-Flight")]
         public async Task<IActionResult> CreateBooking(CreateBookingViewModel model)
         {
             
-            try
-            {
-                var purchase = await _masFlightInterface.CreateBooking(model);
+             var buyTicket = await _masFlightInterface.CreateBooking(model);
+             if (buyTicket != null)
+             {
+                return Ok($"Flight successfully booked");
 
-                return Ok(purchase);
-            }
-            catch (Exception ex)
-            {
-                throw;
+             }
 
-            }
-
+             return StatusCode(StatusCodes.Status400BadRequest, 
+               $"Flight booking failed, please fill details correctly");
 
         }
 
 
+        [HttpPut("Update-Flight")]
+        public async Task<IActionResult> UpdateBooking(CreateBookingViewModel model)
+        {
+
+
+            var update = await _masFlightInterface.UpdateFlight(model);
+            if(update == true)
+            {
+                return Ok($"Flight details updated successfully");
+
+            }
+            return StatusCode(StatusCodes.Status400BadRequest,"Error updating details");
+
+
+        }
+
+   
+        [HttpDelete("Cancel-Flight")]
+        public IActionResult DeleteBooking(Guid Id)
+        {
+
+            _masFlightInterface.DeleteBooking(Id);
+            return Ok($"Flight cancelled");
+            
+        }
+         
     }
 }

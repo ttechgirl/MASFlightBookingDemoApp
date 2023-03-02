@@ -11,7 +11,9 @@ namespace MASFlightBooking.DataAccess.Dtos
     {
         public Guid Id { get; set; }
         public Status Status { get; set; }
-        public decimal? AmountPerSeat { get; set; }
+        public double? AmountPerSeat { get; set; }
         public FlightCategory Category { get; set; }
+        public string? CategoryName { get; set; }
+
     }
 }

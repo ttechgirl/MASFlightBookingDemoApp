@@ -26,7 +26,7 @@ namespace MASFlightBooking.Domain.Models
 
     public interface ISoftDelete
     {
-        bool IsDeleted { get; set; }
+        bool IsDeleted { get; set; } 
         DateTime? DeletedOn { get; set; }
     }
 
@@ -65,7 +65,7 @@ namespace MASFlightBooking.Domain.Models
             this.CreatedOn = DateTime.Now;
         }
         public string DeletedBy { get; set; } = string.Empty;
-        public bool IsDeleted { get; set; }
-        public DateTime? DeletedOn { get; set; }
+        public bool IsDeleted { get; set; } 
+        public DateTime? DeletedOn { get; set; } 
     }
 }

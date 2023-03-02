@@ -15,6 +15,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 //Add services to the container.
 
+builder.Services.AddScoped<IFlightCategory, FlightCategoryRepository>();
+builder.Services.AddScoped<IAirline,AirlineRepository>();
 builder.Services.AddScoped<IMASFlightInterface, MASFlightRepository>();
 builder.Services.AddScoped<IPaymentInterface, PaymentRepository>();
 builder.Services.AddScoped<IUserInterface, UserRepository>();

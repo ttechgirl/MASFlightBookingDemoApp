@@ -12,10 +12,11 @@ namespace MASFlightBooking.DataAccess.Dtos
         public Guid Id { get; set; }
         public Status Status { get; set; }
         public string? AirlineName { get; set; }
-    
+        public Airlines Airline { get; set; }
+
     }
 
-        
 
-    
+
+
 }

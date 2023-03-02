@@ -50,11 +50,7 @@ namespace MASFlightBooking.DataAccess.Services.Repositories
 
         public async Task<MASFlightBookingViewModel> CreateBooking(CreateBookingViewModel model)
         {
-
-            if (model == null)
-            {
-                return null;
-            }
+            
             
             var rand = new Random();
             int tranId = rand.Next(1000);
@@ -65,7 +61,7 @@ namespace MASFlightBooking.DataAccess.Services.Repositories
                     
                 redirect_url = "http://localhost:4001",
                 tx_ref = tx_ref,
-                amount = 40000,
+                amount = 0,
                 currency = "NGN",
                 payment_options = "card",
                 customer = new Customer()
@@ -79,29 +75,93 @@ namespace MASFlightBooking.DataAccess.Services.Repositories
             };
                 
             var request = await _paymentInterface.InitiatePayment(sendPaymentData);
-
+           
             var response = (MASFlightBookingViewModel)model;
             response.PaymentUrl = request.data.link;
             var buyTicket = (MASFlightBookingModel)model;
+           
 
 
             await _appflightDbContext.MASFlights.AddAsync(buyTicket);
 
             await _appflightDbContext.SaveChangesAsync();
 
+            //if (buyTicket != null)
+            //{
+            //    response.PaymentUrl = request.data.link;
+
+            //}
+
 
             return response;
 
         }
 
-        public Task<MASFlightBookingViewModel> UpdateFlight(MASFlightBookingViewModel masflight)
+        public async Task<bool> UpdateFlight(CreateBookingViewModel model)
         {
-            throw new NotImplementedException();
+
+            var existUser = await _appflightDbContext.MASFlights
+                           .Include(p => p.PassangerInfo)
+                            .Include(p => p.PassangerInfo.NextOfKin)
+                            .FirstOrDefaultAsync(x => x.Id == model.Id);
+;                          
+
+            if (existUser == null)
+            {
+               return false;
+
+            }
+
+            //var passanger = new PassangerInfoModel()
+            //{
+            //    Id = existUser.PassangerInfo.Id,
+            //    Name = existUser.PassangerInfo.Name,
+            //    Address = existUser.PassangerInfo.Address,
+            //    PhoneNumber = existUser.PassangerInfo.PhoneNumber,
+            //    ModifiedOn =  DateTime.Now,
+            //};
+
+            existUser.PassangerInfo.Name = model.PassangerInfo.Name;
+            existUser.PassangerInfo.PhoneNumber = model.PassangerInfo.PhoneNumber;
+            existUser.PassangerInfo.Email = model.PassangerInfo.Email;
+            existUser.PassangerInfo.Address = model.PassangerInfo.Address;
+            existUser.PassangerInfo.ModifiedOn = DateTime.Now;
+            existUser.PassangerInfo.NextOfKin.Name = model.PassangerInfo.NextOfKin.Name;
+            existUser.PassangerInfo.NextOfKin.Address = model.PassangerInfo.NextOfKin.Address;
+            existUser.PassangerInfo.NextOfKin.PhoneNumber = model.PassangerInfo.NextOfKin.PhoneNumber;
+            existUser.PassangerInfo.NextOfKin.Relationhsip = model.PassangerInfo.NextOfKin.Relationhsip;
+            existUser.PassangerInfo.NextOfKin.ModifiedOn = DateTime.Now;
+            existUser.Departure = model.Departure;
+            existUser.Destination = model.Destination;
+            existUser.TripType = model.TripType;
+            existUser.BookedDate = model.BookedDate;
+            existUser.FlightCategoryId = model.FlightCategoryId;
+            existUser.AirlineId = model.AirlineId;
+            existUser.FlightTime = model.FlightTime;
+            existUser.ModifiedOn = DateTime.Now;
+
+            _appflightDbContext.Update(existUser);
+            await _appflightDbContext.SaveChangesAsync();
+
+            return true;
+
         }
 
-        public void Revoke_Flight(Guid Id)
+        public void DeleteBooking(Guid Id)
         {
-            throw new NotImplementedException();
+
+            var existUser =  _appflightDbContext.MASFlights
+                .Include(p => p.PassangerInfo)
+                .FirstOrDefault(x => x.Id == Id);
+
+            if(existUser != null)
+            {
+                _appflightDbContext.Remove(existUser); 
+                _appflightDbContext.SaveChanges();
+
+                
+            }
+            
         }
     }
 }

@@ -10,8 +10,11 @@ namespace MASFlightBooking.Domain.ViewModels
 {
     public class FlightCategoryViewModel
     {
+        public Guid Id { get; set; }
         public Status Status { get; set; }
-        public FlightCategory FlightCategory { get; set; }
+        public double? AmountPerSeat { get; set; }
+        public FlightCategory Category { get; set; }
+        public string? CategoryName { get; set; }
 
 
 
@@ -19,7 +22,9 @@ namespace MASFlightBooking.Domain.ViewModels
         {
             var destination = new FlightCategoryViewModel();
             destination.Status = source.Status;
-            destination.FlightCategory = source.FlightCategory;
+            destination.AmountPerSeat = source.AmountPerSeat;
+            destination.CategoryName = source.CategoryName;
+            destination.Category = source.FlightCategory;
             
             return destination;
         }
@@ -29,7 +34,9 @@ namespace MASFlightBooking.Domain.ViewModels
         {
             var destination = new FlightCategoryModel();
             destination.Status = source.Status;
-            destination.FlightCategory = source.FlightCategory;
+            destination.AmountPerSeat = source.AmountPerSeat;
+            destination.CategoryName = source.CategoryName;
+            destination.FlightCategory = source.Category;
 
             return destination;
 

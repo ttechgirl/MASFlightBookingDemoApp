@@ -100,7 +100,73 @@ namespace MASFlightBooking.DataAccess
 
         }
 
+        public static AirlineModel Map(this AirlinesDto model)
+        {
+            if (model == null)
+            {
+                return null;
+            }
+            return new AirlineModel
+            {
+                Id = model.Id,
+                Status = model.Status,
+                Airline = model.Airline,
+                AirlineName = model.AirlineName,
+               
+            };
 
+        }
+
+        public static AirlinesDto Map(this AirlineModel model)
+        {
+            if (model == null)
+            {
+                return null;
+            }
+            return new AirlinesDto
+            {
+                Id = model.Id,
+                Status = model.Status,
+                Airline = model.Airline,
+                AirlineName = model.AirlineName,
+
+            };
+
+        }
+
+        public static FlightCategoryModel Map(this FlightCategoryDto model)
+        {
+            if (model == null)
+            {
+                return null;
+            }
+            return new FlightCategoryModel
+            {
+                Id = model.Id,
+                Status = model.Status,
+                FlightCategory = model.Category,
+                CategoryName = model.CategoryName
+
+            };
+
+        }
+
+        public static FlightCategoryDto Map(this FlightCategoryModel model)
+        {
+            if (model == null)
+            {
+                return null;
+            }
+            return new FlightCategoryDto
+            {
+                Id = model.Id,
+                Status = model.Status,
+                Category = model.FlightCategory,
+                CategoryName = model.CategoryName
+
+            };
+
+        }
     }
        
 }

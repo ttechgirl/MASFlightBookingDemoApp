@@ -10,7 +10,8 @@ namespace MASFlightBooking.Domain.Models
     public class FlightCategoryModel : BaseEntity
     {
         public Status Status { get; set; }
-        public decimal? AmountPerSeat { get; set; }
+        public double? AmountPerSeat { get; set; }
+        public string? CategoryName { get; set; }
         public FlightCategory FlightCategory { get; set; }
         
     }
