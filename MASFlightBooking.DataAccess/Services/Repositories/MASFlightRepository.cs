@@ -48,9 +48,9 @@ namespace MASFlightBooking.DataAccess.Services.Repositories
 
         
 
-        public async Task<MASFlightBookingViewModel> CreateBooking(CreateBookingViewModel model)
+        public async Task<ResponseViewModel> CreateBooking(CreateBookingViewModel model)
         {
-            
+            var response = new ResponseViewModel();
             
             var rand = new Random();
             int tranId = rand.Next(1000);
@@ -58,10 +58,10 @@ namespace MASFlightBooking.DataAccess.Services.Repositories
 
             var sendPaymentData = new PaymentRequestModel()
             {
-                    
-                redirect_url = "http://localhost:4001",
+
+                redirect_url = "http://localhost:",
                 tx_ref = tx_ref,
-                amount = 0,
+                amount = 5000,
                 currency = "NGN",
                 payment_options = "card",
                 customer = new Customer()
@@ -73,29 +73,27 @@ namespace MASFlightBooking.DataAccess.Services.Repositories
                 },
 
             };
-                
-            var request = await _paymentInterface.InitiatePayment(sendPaymentData);
-           
-            var response = (MASFlightBookingViewModel)model;
-            response.PaymentUrl = request.data.link;
-            var buyTicket = (MASFlightBookingModel)model;
-           
 
+            var request = await _paymentInterface.InitiatePayment(sendPaymentData);
+            if (request.status == "Failed")
+            {
+                response.Success = false;
+                response.Message = "Kindly contact support";
+
+            }
+            response.Success = true;
+            response.Message = request.data.link;
+
+            var buyTicket = (MASFlightBookingModel)model;
 
             await _appflightDbContext.MASFlights.AddAsync(buyTicket);
-
             await _appflightDbContext.SaveChangesAsync();
-
-            //if (buyTicket != null)
-            //{
-            //    response.PaymentUrl = request.data.link;
-
-            //}
 
 
             return response;
 
         }
+
 
         public async Task<bool> UpdateFlight(CreateBookingViewModel model)
         {
@@ -126,18 +124,18 @@ namespace MASFlightBooking.DataAccess.Services.Repositories
             existUser.PassangerInfo.Email = model.PassangerInfo.Email;
             existUser.PassangerInfo.Address = model.PassangerInfo.Address;
             existUser.PassangerInfo.ModifiedOn = DateTime.Now;
-            existUser.PassangerInfo.NextOfKin.Name = model.PassangerInfo.NextOfKin.Name;
-            existUser.PassangerInfo.NextOfKin.Address = model.PassangerInfo.NextOfKin.Address;
-            existUser.PassangerInfo.NextOfKin.PhoneNumber = model.PassangerInfo.NextOfKin.PhoneNumber;
-            existUser.PassangerInfo.NextOfKin.Relationhsip = model.PassangerInfo.NextOfKin.Relationhsip;
+            existUser.PassangerInfo.NextOfKin.Name = model.NextOfKin.Name;
+            existUser.PassangerInfo.NextOfKin.Address = model.NextOfKin.Address;
+            existUser.PassangerInfo.NextOfKin.PhoneNumber = model.NextOfKin.PhoneNumber;
+            existUser.PassangerInfo.NextOfKin.Relationhsip = model.NextOfKin.Relationhsip;
             existUser.PassangerInfo.NextOfKin.ModifiedOn = DateTime.Now;
             existUser.Departure = model.Departure;
             existUser.Destination = model.Destination;
             existUser.TripType = model.TripType;
-            existUser.BookedDate = model.BookedDate;
+            //existUser.BookedDate = model.BookedDate;
             existUser.FlightCategoryId = model.FlightCategoryId;
             existUser.AirlineId = model.AirlineId;
-            existUser.FlightTime = model.FlightTime;
+            existUser.FlightDate = model.FlightDate;
             existUser.ModifiedOn = DateTime.Now;
 
             _appflightDbContext.Update(existUser);
@@ -146,6 +144,7 @@ namespace MASFlightBooking.DataAccess.Services.Repositories
             return true;
 
         }
+
 
         public void DeleteBooking(Guid Id)
         {
@@ -161,7 +160,7 @@ namespace MASFlightBooking.DataAccess.Services.Repositories
 
                 
             }
-            
+           
         }
     }
 }

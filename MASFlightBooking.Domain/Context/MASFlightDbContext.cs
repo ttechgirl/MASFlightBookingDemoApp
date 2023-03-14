@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,9 +30,23 @@ namespace MASFlightBooking.Domain.Context
             builder.UseIdentityColumns();
             builder.Seed();
 
+          //  builder.Entity<DateOnly>()
+          //.HaveConversion<DateOnlyConverter, DateOnlyComparer>()
+          //.HaveColumnType("date");
+
         }
 
 
        
     }
+    //public class DateOnlyConverter : ValueConverter<DateOnly, DateTime>
+    //{
+    //    /// <summary>
+    //    /// Creates a new instance of this converter.
+    //    /// </summary>
+    //    public DateOnlyConverter() : base(
+    //            d => d.ToDateTime(TimeOnly.MinValue),
+    //            d => DateOnly.FromDateTime(d))
+    //    { }
+    //}
 }

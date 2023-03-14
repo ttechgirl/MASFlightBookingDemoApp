@@ -20,8 +20,8 @@ namespace MASFlightBooking.DataAccess.Dtos
         public FlightCategoryModel? FlightCategory { get; set; }
         public Guid FlightCategoryId { get; set; }
         public TripType TripType { get; set; }
-        public DateTime BookedDate { get; set; }
-        public DateTime FlightTime { get; set; }
+        public DateTime BookedDate { get; }
+        public DateTime FlightDate { get; set; }
         public decimal TotalCost { get; set; }
 
 

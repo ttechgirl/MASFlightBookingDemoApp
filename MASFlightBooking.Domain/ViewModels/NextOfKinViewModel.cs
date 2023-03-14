@@ -1,6 +1,7 @@
 ﻿using MASFlightBooking.Domain.Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,9 +10,13 @@ namespace MASFlightBooking.Domain.ViewModels
 {
     public class NextOfKinViewModel
     {
+        [DisplayName("NextOfKin Name")]
         public string? Name { get; set; }
+        [DisplayName("NextOfKin Relationship")]
         public string? Relationhsip { get; set; }
+        [DisplayName("NextOfKin PhoneNumber")]
         public string? PhoneNumber { get; set; }
+        [DisplayName("NextOfKin Address")]
         public string? Address { get; set; }
 
 

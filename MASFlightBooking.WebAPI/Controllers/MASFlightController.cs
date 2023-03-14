@@ -53,7 +53,7 @@ namespace MASFlightBooking.WebAPI.Controllers
              var buyTicket = await _masFlightInterface.CreateBooking(model);
              if (buyTicket != null)
              {
-                return Ok($"Flight successfully booked");
+                return Ok(buyTicket);
 
              }
 
@@ -67,11 +67,10 @@ namespace MASFlightBooking.WebAPI.Controllers
         public async Task<IActionResult> UpdateBooking(CreateBookingViewModel model)
         {
 
-
             var update = await _masFlightInterface.UpdateFlight(model);
             if(update == true)
             {
-                return Ok($"Flight details updated successfully");
+                return Ok(update);
 
             }
             return StatusCode(StatusCodes.Status400BadRequest,"Error updating details");
@@ -85,7 +84,7 @@ namespace MASFlightBooking.WebAPI.Controllers
         {
 
             _masFlightInterface.DeleteBooking(Id);
-            return Ok($"Flight cancelled");
+            return Ok(Id);
             
         }
          

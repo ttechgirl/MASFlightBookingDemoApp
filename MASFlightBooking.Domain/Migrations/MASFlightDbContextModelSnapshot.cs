@@ -72,7 +72,7 @@ namespace MASFlightBooking.Domain.Migrations
                             Airline = 0,
                             AirlineName = "Dana Air",
                             CreatedBy = "",
-                            CreatedOn = new DateTime(2023, 2, 20, 19, 9, 50, 758, DateTimeKind.Local).AddTicks(8910),
+                            CreatedOn = new DateTime(2023, 3, 13, 15, 21, 51, 477, DateTimeKind.Local).AddTicks(2725),
                             DeletedBy = "",
                             IsDeleted = false,
                             ModifiedBy = "",
@@ -84,7 +84,7 @@ namespace MASFlightBooking.Domain.Migrations
                             Airline = 4,
                             AirlineName = "Air France",
                             CreatedBy = "",
-                            CreatedOn = new DateTime(2023, 2, 20, 19, 9, 50, 758, DateTimeKind.Local).AddTicks(8953),
+                            CreatedOn = new DateTime(2023, 3, 13, 15, 21, 51, 477, DateTimeKind.Local).AddTicks(2768),
                             DeletedBy = "",
                             IsDeleted = false,
                             ModifiedBy = "",
@@ -96,7 +96,7 @@ namespace MASFlightBooking.Domain.Migrations
                             Airline = 1,
                             AirlineName = "IRS",
                             CreatedBy = "",
-                            CreatedOn = new DateTime(2023, 2, 20, 19, 9, 50, 758, DateTimeKind.Local).AddTicks(8986),
+                            CreatedOn = new DateTime(2023, 3, 13, 15, 21, 51, 477, DateTimeKind.Local).AddTicks(2790),
                             DeletedBy = "",
                             IsDeleted = false,
                             ModifiedBy = "",
@@ -108,7 +108,7 @@ namespace MASFlightBooking.Domain.Migrations
                             Airline = 3,
                             AirlineName = "MAS AIr",
                             CreatedBy = "",
-                            CreatedOn = new DateTime(2023, 2, 20, 19, 9, 50, 758, DateTimeKind.Local).AddTicks(9018),
+                            CreatedOn = new DateTime(2023, 3, 13, 15, 21, 51, 477, DateTimeKind.Local).AddTicks(2809),
                             DeletedBy = "",
                             IsDeleted = false,
                             ModifiedBy = "",
@@ -120,7 +120,7 @@ namespace MASFlightBooking.Domain.Migrations
                             Airline = 2,
                             AirlineName = "Ibom AIr",
                             CreatedBy = "",
-                            CreatedOn = new DateTime(2023, 2, 20, 19, 9, 50, 758, DateTimeKind.Local).AddTicks(9048),
+                            CreatedOn = new DateTime(2023, 3, 13, 15, 21, 51, 477, DateTimeKind.Local).AddTicks(2828),
                             DeletedBy = "",
                             IsDeleted = false,
                             ModifiedBy = "",
@@ -181,7 +181,7 @@ namespace MASFlightBooking.Domain.Migrations
                             AmountPerSeat = 50000.5,
                             CategoryName = "Business",
                             CreatedBy = "",
-                            CreatedOn = new DateTime(2023, 2, 20, 19, 9, 50, 758, DateTimeKind.Local).AddTicks(9182),
+                            CreatedOn = new DateTime(2023, 3, 13, 15, 21, 51, 477, DateTimeKind.Local).AddTicks(2922),
                             DeletedBy = "",
                             FlightCategory = 3,
                             IsDeleted = false,
@@ -194,7 +194,7 @@ namespace MASFlightBooking.Domain.Migrations
                             AmountPerSeat = 123000.5,
                             CategoryName = "Premium",
                             CreatedBy = "",
-                            CreatedOn = new DateTime(2023, 2, 20, 19, 9, 50, 758, DateTimeKind.Local).AddTicks(9240),
+                            CreatedOn = new DateTime(2023, 3, 13, 15, 21, 51, 477, DateTimeKind.Local).AddTicks(2944),
                             DeletedBy = "",
                             FlightCategory = 1,
                             IsDeleted = false,
@@ -207,7 +207,7 @@ namespace MASFlightBooking.Domain.Migrations
                             AmountPerSeat = 35800.5,
                             CategoryName = "Economy",
                             CreatedBy = "",
-                            CreatedOn = new DateTime(2023, 2, 20, 19, 9, 50, 758, DateTimeKind.Local).AddTicks(9381),
+                            CreatedOn = new DateTime(2023, 3, 13, 15, 21, 51, 477, DateTimeKind.Local).AddTicks(2965),
                             DeletedBy = "",
                             FlightCategory = 0,
                             IsDeleted = false,
@@ -220,7 +220,7 @@ namespace MASFlightBooking.Domain.Migrations
                             AmountPerSeat = 210000.5,
                             CategoryName = "First Class",
                             CreatedBy = "",
-                            CreatedOn = new DateTime(2023, 2, 20, 19, 9, 50, 758, DateTimeKind.Local).AddTicks(9418),
+                            CreatedOn = new DateTime(2023, 3, 13, 15, 21, 51, 477, DateTimeKind.Local).AddTicks(2984),
                             DeletedBy = "",
                             FlightCategory = 2,
                             IsDeleted = false,
@@ -237,9 +237,6 @@ namespace MASFlightBooking.Domain.Migrations
 
                     b.Property<Guid>("AirlineId")
                         .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("BookedDate")
-                        .HasColumnType("datetime2");
 
                     b.Property<string>("CreatedBy")
                         .IsRequired()
@@ -264,7 +261,7 @@ namespace MASFlightBooking.Domain.Migrations
                     b.Property<Guid>("FlightCategoryId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("FlightTime")
+                    b.Property<DateTime>("FlightDate")
                         .HasColumnType("datetime2");
 
                     b.Property<bool>("IsDeleted")
@@ -301,14 +298,13 @@ namespace MASFlightBooking.Domain.Migrations
                         {
                             Id = new Guid("43738933-acf0-4479-8624-0ef1bec0383d"),
                             AirlineId = new Guid("6c7e9c5d-89ae-43d9-8f19-feb71af65e8f"),
-                            BookedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CreatedBy = "",
-                            CreatedOn = new DateTime(2023, 2, 20, 19, 9, 50, 758, DateTimeKind.Local).AddTicks(8483),
+                            CreatedOn = new DateTime(2023, 3, 13, 15, 21, 51, 477, DateTimeKind.Local).AddTicks(2423),
                             DeletedBy = "",
                             Departure = 0,
                             Destination = 0,
                             FlightCategoryId = new Guid("73c5bcba-65b6-46a3-897f-7d67fc0480b8"),
-                            FlightTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FlightDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsDeleted = false,
                             ModifiedBy = "",
                             PassangerInfoId = new Guid("923a643a-9c41-464e-9fe3-29656c34e589"),
@@ -369,7 +365,7 @@ namespace MASFlightBooking.Domain.Migrations
                             Id = new Guid("0ffe12ec-ea61-4e47-8a5c-e753a5fe2823"),
                             Address = "Abule egba ",
                             CreatedBy = "",
-                            CreatedOn = new DateTime(2023, 2, 20, 19, 9, 50, 758, DateTimeKind.Local).AddTicks(9142),
+                            CreatedOn = new DateTime(2023, 3, 13, 15, 21, 51, 477, DateTimeKind.Local).AddTicks(2898),
                             DeletedBy = "",
                             IsDeleted = false,
                             ModifiedBy = "",
@@ -438,7 +434,7 @@ namespace MASFlightBooking.Domain.Migrations
                             Id = new Guid("923a643a-9c41-464e-9fe3-29656c34e589"),
                             Address = "Abule egba ",
                             CreatedBy = "",
-                            CreatedOn = new DateTime(2023, 2, 20, 19, 9, 50, 758, DateTimeKind.Local).AddTicks(9090),
+                            CreatedOn = new DateTime(2023, 3, 13, 15, 21, 51, 477, DateTimeKind.Local).AddTicks(2859),
                             DeletedBy = "",
                             Email = "ayisatabiodun@gmail.com",
                             IsDeleted = false,

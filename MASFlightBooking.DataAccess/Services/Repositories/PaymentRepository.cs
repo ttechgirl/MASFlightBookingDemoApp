@@ -21,7 +21,8 @@ namespace MASFlightBooking.DataAccess.Services.Repositories
 
         public async Task<PaymentResponseModel> InitiatePayment(PaymentRequestModel model)
         {
-            PaymentResponseModel deserialize;
+            //PaymentResponseModel deserialize;
+            var paymentResponse = new PaymentResponseModel();
 
             var key = configuration.GetValue<string>("FlutterWave:SecretKey");
             var url = $"{configuration.GetValue<string>("FlutterWave:url")}/payments";
@@ -32,11 +33,17 @@ namespace MASFlightBooking.DataAccess.Services.Repositories
             //serialize model object to json string
             var data = JsonConvert.SerializeObject(model);
             var sendRequest = await client.PostAsync(url, new StringContent(data, Encoding.UTF8, "application/json"));
+
+            if (!sendRequest.IsSuccessStatusCode)
+            {
+                paymentResponse.status = "Failed";
+                paymentResponse.message = $"Api call returned status code {sendRequest.StatusCode}" ;
+                return paymentResponse;
+            }
             var response = await sendRequest.Content.ReadAsStringAsync();
-
-            deserialize = JsonConvert.DeserializeObject<PaymentResponseModel>(response);
-
-            return deserialize;
+            paymentResponse = JsonConvert.DeserializeObject<PaymentResponseModel>(response);
+            paymentResponse.status = "Success";
+            return paymentResponse;
         }
 
         public async Task<PaymentVerificationResponseModel> VerifyPayment(string transactionId)

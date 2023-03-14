@@ -1,0 +1,143 @@
+﻿@model IEnumerable<MASFlightBooking.Domain.ViewModels.CreateBookingViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Available Flights</h1>
+
+<p>
+    <a asp-action="Create" class= "btn btn-secondary">&gt;&gt; Book Flight</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+
+            <th>
+                @*@Html.HiddenFor(model => model.Id)*@
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BookedDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FlightDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Departure)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Destination)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TripType)
+            </th>
+             <th>
+                @Html.DisplayNameFor(model => model.AirlineId)
+            </th>
+             <th>
+                @Html.DisplayNameFor(model => model.FlightCategoryId)
+            </th>
+             <th>
+                @Html.DisplayNameFor(model => model.PassangerInfo.Name)
+            </th>
+             <th>
+                @Html.DisplayNameFor(model => model.PassangerInfo.Email)
+            </th>
+             <th>
+                @Html.DisplayNameFor(model => model.PassangerInfo.Address)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PassangerInfo.PhoneNumber)
+            </th>
+             <th>
+                @Html.DisplayNameFor(model => model.NextOfKin.Name)
+            </th>
+             <th>
+                @Html.DisplayNameFor(model => model.NextOfKin.PhoneNumber)
+            </th>
+             <th>
+                @Html.DisplayNameFor(model => model.NextOfKin.Address)
+            </th>
+              <th>
+                @Html.DisplayNameFor(model => model.NextOfKin.Relationhsip)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BookedDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FlightDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Departure)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Destination)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TripType)
+            </td>
+             <td>
+                @Html.DisplayFor(modelItem => item.AirlineId)
+            </td>
+             <td>
+                @Html.DisplayFor(modelItem => item.FlightCategoryId)
+            </td>
+             <td>
+                @Html.DisplayFor(modelItem => item.PassangerInfo.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PassangerInfo.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PassangerInfo.Address)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PassangerInfo.PhoneNumber)
+            </td>
+             <td>
+                @Html.DisplayFor(modelItem => item.NextOfKin.Name)
+            </td>
+             <td>
+                @Html.DisplayFor(modelItem => item.NextOfKin.PhoneNumber)
+            </td>
+             <td>
+                @Html.DisplayFor(modelItem => item.NextOfKin.Address)
+            </td>
+             <td>
+                @Html.DisplayFor(modelItem => item.NextOfKin.Relationhsip)
+            </td>
+           
+            <td>
+                <p>
+
+                   <a asp-action="Edit" asp-route-id="@item.Id" class= "btn btn-secondary"> Update Flight</a>
+                </p> 
+                <p>
+                   <a asp-action="GetDetails" asp-route-id="@item.Id" class= "btn btn-secondary"> Check Details</a>
+                </p>  
+                <p>
+                   <a asp-action="Delete" asp-route-id="@item.Id" class= "btn btn-secondary" > Cancel Flight</a>
+                </p>
+
+
+                @*@Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "GetDetails", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
+            </td>
+        </tr>
+}        <tr>
+            @Html.ValidationSummary(true,"",new{@class = "text-danger"})
+        </tr>
+    </tbody>
+</table>

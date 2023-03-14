@@ -11,8 +11,8 @@ namespace MASFlightBooking.Domain.Models
 {
     public class MASFlightBookingModel : BaseEntity
     {
-        public DateTime BookedDate { get; set; }
-        public DateTime FlightTime { get; set; }
+        public DateTime BookedDate { get;}
+        public DateTime FlightDate { get; set; }
         public decimal TotalCost { get; set; }
         public Departure Departure { get; set; }
         public Destination Destination { get; set; }

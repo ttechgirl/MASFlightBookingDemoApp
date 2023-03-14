@@ -27,8 +27,8 @@ namespace MASFlightBooking.DataAccess
                 Destination = model.Destination,
                 FlightCategoryId = model.FlightCategoryId,
                 TripType = model.TripType,
-                BookedDate = model.BookedDate,
-                FlightTime = model.FlightTime,
+                //BookedDate = model.BookedDate,
+                FlightDate = model.FlightDate,
                 TotalCost = model.TotalCost,
 
             };
@@ -52,8 +52,8 @@ namespace MASFlightBooking.DataAccess
                 Destination = entity.Destination,
                 FlightCategoryId = entity.FlightCategoryId,
                 TripType = entity.TripType,
-                BookedDate = entity.BookedDate,
-                FlightTime = entity.FlightTime,
+                //BookedDate = entity.BookedDate,
+                FlightDate = entity.FlightDate,
                 TotalCost = entity.TotalCost,
 
             };

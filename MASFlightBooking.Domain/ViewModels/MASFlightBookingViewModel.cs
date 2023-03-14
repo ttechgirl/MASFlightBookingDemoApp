@@ -1,5 +1,6 @@
 ﻿using MASFlightBooking.Domain.Enums;
 using MASFlightBooking.Domain.Models;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,8 +12,9 @@ namespace MASFlightBooking.Domain.ViewModels
     public class MASFlightBookingViewModel 
     {
         public PassangerInfoViewModel? PassangerInfo { get; set; }
-        public DateTime BookedDate { get; set; }
-        public DateTime FlightTime { get; set; }
+        public NextOfKinViewModel? NextOfKin { get; set;}
+        public DateTime BookedDate { get; }
+        public DateTime FlightDate { get; set; }
         public Departure Departure { get; set; }
         public Destination Destination { get; set; }
         public TripType TripType { get; set; }
@@ -24,8 +26,9 @@ namespace MASFlightBooking.Domain.ViewModels
         {
             var destination = new MASFlightBookingViewModel();
             destination.PassangerInfo = (PassangerInfoViewModel?)source.PassangerInfo;
-            destination.BookedDate = source.BookedDate;
-            destination.FlightTime = source.FlightTime;
+            destination.NextOfKin = (NextOfKinViewModel?)source.PassangerInfo.NextOfKin;
+           // destination.BookedDate = source.BookedDate;
+            destination.FlightDate = source.FlightDate;
             destination.Departure = source.Departure;
             destination.Destination = source.Destination;
             destination.TripType = source.TripType; 
@@ -37,8 +40,9 @@ namespace MASFlightBooking.Domain.ViewModels
         {
             var destination = new MASFlightBookingModel();
             destination.PassangerInfo = (PassangerInfoModel?)source.PassangerInfo;
-            destination.BookedDate = source.BookedDate;
-            destination.FlightTime = source.FlightTime;
+            destination.PassangerInfo.NextOfKin = (NextOfKin?)source.NextOfKin;
+            //destination.BookedDate = source.BookedDate;
+            destination.FlightDate = source.FlightDate;
             destination.Departure = source.Departure;
             destination.Destination = source.Destination;
             destination.TripType = source.TripType;
@@ -50,10 +54,12 @@ namespace MASFlightBooking.Domain.ViewModels
 
     public class CreateBookingViewModel 
     {
+        //[HiddenInput(DisplayValue = false)]
         public Guid Id { get; set; }
         public PassangerInfoViewModel? PassangerInfo { get; set; }
-        public DateTime BookedDate { get; set; }
-        public DateTime FlightTime { get; set; }
+        public NextOfKinViewModel? NextOfKin { get; set; }
+        public DateTime BookedDate { get; }
+        public DateTime FlightDate { get; set; }
         public Departure Departure { get; set; }
         public Destination Destination { get; set; }
         public TripType TripType { get; set; }
@@ -67,8 +73,8 @@ namespace MASFlightBooking.Domain.ViewModels
             var destination = new CreateBookingViewModel();
             destination.Id = source.Id;
             destination.PassangerInfo = (PassangerInfoViewModel?)source.PassangerInfo;
-            destination.BookedDate = source.BookedDate;
-            destination.FlightTime = source.FlightTime;
+            //destination.BookedDate = source.BookedDate;
+            destination.FlightDate = source.FlightDate;
             destination.Departure = source.Departure;
             destination.Destination = source.Destination;
             destination.TripType = source.TripType;
@@ -81,8 +87,8 @@ namespace MASFlightBooking.Domain.ViewModels
             var destination = new MASFlightBookingModel();
             destination.Id = source.Id;
             destination.PassangerInfo = (PassangerInfoModel?)source.PassangerInfo;
-            destination.BookedDate = source.BookedDate;
-            destination.FlightTime = source.FlightTime;
+            //destination.BookedDate = source.BookedDate;
+            destination.FlightDate = source.FlightDate;
             destination.Departure = source.Departure;
             destination.Destination = source.Destination;
             destination.TripType = source.TripType;
@@ -95,8 +101,8 @@ namespace MASFlightBooking.Domain.ViewModels
         {
             var destination = new MASFlightBookingViewModel();
             destination.PassangerInfo = source.PassangerInfo;
-            destination.BookedDate = source.BookedDate;
-            destination.FlightTime = source.FlightTime;
+            //destination.BookedDate = source.BookedDate;
+            destination.FlightDate = source.FlightDate;
             destination.Departure = source.Departure;
             destination.Destination = source.Destination;
             destination.TripType = source.TripType;
@@ -108,14 +114,12 @@ namespace MASFlightBooking.Domain.ViewModels
         {
             var destination = new CreateBookingViewModel();
             destination.PassangerInfo = source.PassangerInfo;
-            destination.BookedDate = source.BookedDate;
-            destination.FlightTime = source.FlightTime;
+           // destination.BookedDate = source.BookedDate;
+            destination.FlightDate = source.FlightDate;
             destination.Departure = source.Departure;
             destination.Destination = source.Destination;
             destination.TripType = source.TripType;
             return destination;
         }
-
-
     }
 }

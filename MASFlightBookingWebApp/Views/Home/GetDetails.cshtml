@@ -1,0 +1,145 @@
+﻿@model MASFlightBooking.Domain.ViewModels.CreateBookingViewModel
+
+@{
+    ViewData["Title"] = "GetDetails";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Flight Details</h2>
+ <hr />
+<div>
+    <hr />
+    <dl class="row">
+
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Id)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Id)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.PassangerInfo.Name)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.PassangerInfo.Name)
+        </dd>
+         <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.PassangerInfo.Email)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.PassangerInfo.Email)
+        </dd>
+         <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.PassangerInfo.Address)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.PassangerInfo.Address)
+        </dd>
+          <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.PassangerInfo.PhoneNumber)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.PassangerInfo.PhoneNumber)
+        </dd>
+          <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.PassangerInfo.MaturityLevel)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.PassangerInfo.MaturityLevel)
+        </dd>
+         <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.NextOfKin.Name)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.NextOfKin.Name)
+        </dd>
+         <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.NextOfKin.PhoneNumber)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.NextOfKin.PhoneNumber)
+        </dd>
+         <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.NextOfKin.Address)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.NextOfKin.Address)
+        </dd>
+          <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.NextOfKin.Relationhsip)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.NextOfKin.Relationhsip)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.AirlineId)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.AirlineId)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Departure)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Departure)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Destination)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Destination)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.FlightCategoryId)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.FlightCategoryId)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.TripType)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.TripType)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.BookedDate)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.BookedDate)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.FlightDate)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.FlightDate)
+        </dd>
+       @* <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.TotalCost)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.TotalCost)
+        </dd>*@
+    </dl>
+     <hr />
+            <a asp-action="Edit" asp-route-id="@Model.Id" class = "btn btn-warning">Edit</a>
+            <a asp-action="Index" class = "btn btn-primary">&lt;&lt; Back to List</a>
+        
+         
+      @*  <div>
+            <div class="col-md-4">
+            <form asp-action="Edit">
+
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+
+                    <label asp-for="Id"  class="control-label"></label>
+                    <input asp-for="Id"  class="form-control" />
+                    <span asp-validation-for="Id"  class="text-danger"></span>
+                </div>
+                <hr />
+                    <a asp-action="Edit" asp-route-id="@Model.Id" class = "btn btn-warning">Edit</a>
+                    <a asp-action="Index" class = "btn btn-primary">&lt;&lt; Back to List</a>
+            </form>
+            </div>
+            </div>*@
+ </div>
