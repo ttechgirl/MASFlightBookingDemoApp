@@ -46,7 +46,6 @@ namespace MASFlightBookingWebApp.Controllers
 
             client.BaseAddress = new Uri(url);
             var request = await client.GetAsync($"api/MASFlight/Get-Single-Flight?Id={Id}");
-           
             var response = await request.Content.ReadAsStringAsync();
             var flight = JsonConvert.DeserializeObject<CreateBookingViewModel>(response);
             return View(flight);
@@ -55,6 +54,7 @@ namespace MASFlightBookingWebApp.Controllers
 
         public ActionResult Create()
         {
+
             return View();
         }
 
@@ -77,20 +77,17 @@ namespace MASFlightBookingWebApp.Controllers
             }
             return RedirectToAction("Index");
 
-
         }
 
-        
 
-       // [HttpPut]
+        //[HttpPut]
         public async Task<IActionResult> Edit(CreateBookingViewModel model)
         {
-
-           
             client.BaseAddress = new Uri(url);
+            var data = JsonConvert.SerializeObject(model);
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            var request = await client.PutAsync("api/MASFlight/Update-Flight", new StringContent(url));
+            var request = await client.PutAsync("api/MASFlight/Update-Flight", new StringContent(data, Encoding.UTF8));
             var response = await request.Content.ReadAsStringAsync();
             var flight = JsonConvert.DeserializeObject<CreateBookingViewModel>(response);
 

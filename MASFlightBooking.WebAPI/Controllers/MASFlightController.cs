@@ -84,7 +84,7 @@ namespace MASFlightBooking.WebAPI.Controllers
         {
 
             _masFlightInterface.DeleteBooking(Id);
-            return Ok(Id);
+            return Ok();
             
         }
          

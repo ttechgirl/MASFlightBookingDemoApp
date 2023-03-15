@@ -16,11 +16,11 @@
                 <input type="hidden" asp-for="Id" class="form-control" />
 
 
-            <div class="form-group">
+           @* <div class="form-group">
                 <label asp-for="Id" class="control-label"></label>
                 <input asp-for="Id" class="form-control" />
                 <span asp-validation-for="Id" class="text-danger"></span>
-            </div>
+            </div>*@
            @* <div class="form-group">
                 <label asp-for="BookedDate" class="control-label"></label>
                 <input asp-for="BookedDate" class="form-control" />
@@ -104,7 +104,7 @@
                 <input asp-for="FlightCategoryId" class="form-control" />
                 <span asp-validation-for="FlightCategoryId" class="text-danger"></span>
             </div>
-             <div class="form-group">
+              <div class="form-group">
                 <label asp-for="PassangerInfo.Name" class="control-label"></label>
                 <input asp-for="PassangerInfo.Name" class="form-control" />
                 <span asp-validation-for="PassangerInfo.Name" class="text-danger"></span>
@@ -124,6 +124,11 @@
                 <input asp-for="PassangerInfo.Email" class="form-control" />
                 <span asp-validation-for="PassangerInfo.Email" class="text-danger"></span>
             </div>
+             <div class="form-group">
+                <label asp-for="PassangerInfo.MaturityLevel" class="control-label"></label>
+                <input asp-for="PassangerInfo.MaturityLevel" class="form-control" />
+                <span asp-validation-for="PassangerInfo.MaturityLevel" class="text-danger"></span>
+            </div>
             <div class="form-group">
                 <label asp-for="NextOfKin.Name" class="control-label"></label>
                 <input asp-for="NextOfKin.Name" class="form-control" />
@@ -134,6 +139,16 @@
                 <input asp-for="NextOfKin.PhoneNumber" class="form-control" />
                 <span asp-validation-for="NextOfKin.PhoneNumber" class="text-danger"></span>
             </div>
+              <div class="form-group">
+                <label asp-for="NextOfKin.Relationhsip" class="control-label"></label>
+                <input asp-for="NextOfKin.Relationhsip" class="form-control" />
+                <span asp-validation-for="NextOfKin.Relationhsip" class="text-danger"></span>
+            </div>
+              <div class="form-group">
+                <label asp-for="NextOfKin.Address" class="control-label"></label>
+                <input asp-for="NextOfKin.Address" class="form-control" />
+                <span asp-validation-for="NextOfKin.Address" class="text-danger"></span>
+            </div>
             <div class="form-group">
                 <hr />
                 <input type="submit" value="Save" class="btn btn-secondary" />
@@ -143,7 +158,6 @@
         </form>
     </div>
 </div>
-
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

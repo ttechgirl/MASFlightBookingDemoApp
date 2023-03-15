@@ -5,43 +5,95 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Create</h1>
+<h1>Book Flight</h1>
 
-<h4>CreateBookingViewModel</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
+                <input type="hidden" asp-for="Id" class="form-control" />
+
+                <input type="hidden" asp-for="BookedDate" class="form-control" />
+
+           @* <div class="form-group">
                 <label asp-for="Id" class="control-label"></label>
                 <input asp-for="Id" class="form-control" />
                 <span asp-validation-for="Id" class="text-danger"></span>
-            </div>
-            <div class="form-group">
+            </div>*@
+           @* <div class="form-group">
                 <label asp-for="BookedDate" class="control-label"></label>
                 <input asp-for="BookedDate" class="form-control" />
                 <span asp-validation-for="BookedDate" class="text-danger"></span>
-            </div>
+            </div>*@
             <div class="form-group">
                 <label asp-for="FlightDate" class="control-label"></label>
                 <input asp-for="FlightDate" class="form-control" />
                 <span asp-validation-for="FlightDate" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Departure" class="control-label"></label>
+                <label>
+                    Departure
+                    <br />
+                     <p>
+                     <select name ="Departure">
+                            <option>None</option>
+                            <option>Lagos_LOS</option>
+                            <option>Abuja_ABV</option>
+                            <option>Anambra_ANA</option>
+                            <option>Portharcourt_PHC</option>
+                            <option>Enugu_ENU</option>
+                            <option>Ilorin_ILR</option>
+                            <option>Kaduna_KAD</option>
+                            <option>Kano_KAN</option>
+                            <option>Sokoto_SKO</option>
+                     </select>
+                
+                </p>
+                    </label>
+               @* <label asp-for="Departure" class="control-label"></label>
                 <input asp-for="Departure" class="form-control" />
-                <span asp-validation-for="Departure" class="text-danger"></span>
+                <span asp-validation-for="Departure" class="text-danger"></span>*@
             </div>
             <div class="form-group">
-                <label asp-for="Destination" class="control-label"></label>
+
+                <label>
+                    Destination
+                    <br />
+                     <p>
+                     <select name ="Destination">
+                            <option>None</option>
+                            <option>Lagos_LOS</option>
+                            <option>Abuja_ABV</option>
+                            <option>Anambra_ANA</option>
+                            <option>Portharcourt_PHC</option>
+                            <option>Enugu_ENU</option>
+                            <option>Ilorin_ILR</option>
+                            <option>Kaduna_KAD</option>
+                            <option>Kano_KAN</option>
+                            <option>Sokoto_SKO</option>
+                     </select>
+                </p>
+                    </label>
+               @*     <label asp-for="Destination" class="control-label"></label>
                 <input asp-for="Destination" class="form-control" />
-                <span asp-validation-for="Destination" class="text-danger"></span>
+                <span asp-validation-for="Destination" class="text-danger"></span>*@
             </div>
             <div class="form-group">
-                <label asp-for="TripType" class="control-label"></label>
+                <label>
+                    Trip Type
+                    <br />
+                     <p>
+                     <select name ="Trip_Type">
+                            <option> None</option>
+                            <option> RoundTrip </option>
+                            <option> OneWay</option>
+                     </select>
+                </p>
+                    </label>
+             @*   <label asp-for="TripType" class="control-label"></label>
                 <input asp-for="TripType" class="form-control" />
-                <span asp-validation-for="TripType" class="text-danger"></span>
+                <span asp-validation-for="TripType" class="text-danger"></span>*@
             </div>
             <div class="form-group">
                 <label asp-for="AirlineId" class="control-label"></label>
@@ -53,15 +105,59 @@
                 <input asp-for="FlightCategoryId" class="form-control" />
                 <span asp-validation-for="FlightCategoryId" class="text-danger"></span>
             </div>
+             <div class="form-group">
+                <label asp-for="PassangerInfo.Name" class="control-label"></label>
+                <input asp-for="PassangerInfo.Name" class="form-control" />
+                <span asp-validation-for="PassangerInfo.Name" class="text-danger"></span>
+            </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <label asp-for="PassangerInfo.Address" class="control-label"></label>
+                <input asp-for="PassangerInfo.Address" class="form-control" />
+                <span asp-validation-for="PassangerInfo.Address" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PassangerInfo.PhoneNumber" class="control-label"></label>
+                <input asp-for="PassangerInfo.PhoneNumber" class="form-control" />
+                <span asp-validation-for="PassangerInfo.PhoneNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PassangerInfo.Email" class="control-label"></label>
+                <input asp-for="PassangerInfo.Email" class="form-control" />
+                <span asp-validation-for="PassangerInfo.Email" class="text-danger"></span>
+            </div>
+             <div class="form-group">
+                <label asp-for="PassangerInfo.MaturityLevel" class="control-label"></label>
+                <input asp-for="PassangerInfo.MaturityLevel" class="form-control" />
+                <span asp-validation-for="PassangerInfo.MaturityLevel" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NextOfKin.Name" class="control-label"></label>
+                <input asp-for="NextOfKin.Name" class="form-control" />
+                <span asp-validation-for="NextOfKin.Name" class="text-danger"></span>
+            </div>
+              <div class="form-group">
+                <label asp-for="NextOfKin.PhoneNumber" class="control-label"></label>
+                <input asp-for="NextOfKin.PhoneNumber" class="form-control" />
+                <span asp-validation-for="NextOfKin.PhoneNumber" class="text-danger"></span>
+            </div>
+              <div class="form-group">
+                <label asp-for="NextOfKin.Relationhsip" class="control-label"></label>
+                <input asp-for="NextOfKin.Relationhsip" class="form-control" />
+                <span asp-validation-for="NextOfKin.Relationhsip" class="text-danger"></span>
+            </div>
+              <div class="form-group">
+                <label asp-for="NextOfKin.Address" class="control-label"></label>
+                <input asp-for="NextOfKin.Address" class="form-control" />
+                <span asp-validation-for="NextOfKin.Address" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <hr />
+                <input type="submit" value="Book" class="btn btn-primary" />
+                <a asp-action="Index" class = "btn btn-primary">Previous Page</a>
+
             </div>
         </form>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {

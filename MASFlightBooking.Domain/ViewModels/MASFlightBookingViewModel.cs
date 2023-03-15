@@ -73,6 +73,7 @@ namespace MASFlightBooking.Domain.ViewModels
             var destination = new CreateBookingViewModel();
             destination.Id = source.Id;
             destination.PassangerInfo = (PassangerInfoViewModel?)source.PassangerInfo;
+            destination.NextOfKin = (NextOfKinViewModel?)source.PassangerInfo.NextOfKin;
             //destination.BookedDate = source.BookedDate;
             destination.FlightDate = source.FlightDate;
             destination.Departure = source.Departure;
@@ -87,6 +88,7 @@ namespace MASFlightBooking.Domain.ViewModels
             var destination = new MASFlightBookingModel();
             destination.Id = source.Id;
             destination.PassangerInfo = (PassangerInfoModel?)source.PassangerInfo;
+            destination.PassangerInfo.NextOfKin = (NextOfKin?)source.NextOfKin;
             //destination.BookedDate = source.BookedDate;
             destination.FlightDate = source.FlightDate;
             destination.Departure = source.Departure;
@@ -101,6 +103,7 @@ namespace MASFlightBooking.Domain.ViewModels
         {
             var destination = new MASFlightBookingViewModel();
             destination.PassangerInfo = source.PassangerInfo;
+            destination.NextOfKin = source.NextOfKin;
             //destination.BookedDate = source.BookedDate;
             destination.FlightDate = source.FlightDate;
             destination.Departure = source.Departure;
@@ -114,6 +117,7 @@ namespace MASFlightBooking.Domain.ViewModels
         {
             var destination = new CreateBookingViewModel();
             destination.PassangerInfo = source.PassangerInfo;
+            destination.NextOfKin = source.NextOfKin;
            // destination.BookedDate = source.BookedDate;
             destination.FlightDate = source.FlightDate;
             destination.Departure = source.Departure;
