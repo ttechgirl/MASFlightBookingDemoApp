@@ -79,25 +79,38 @@ namespace MASFlightBookingWebApp.Controllers
 
         }
 
-
-        //[HttpPut]
-        public async Task<IActionResult> Edit(CreateBookingViewModel model)
+        public async Task<IActionResult> Edit(Guid Id)
         {
             client.BaseAddress = new Uri(url);
-            var data = JsonConvert.SerializeObject(model);
-            client.DefaultRequestHeaders.Accept.Clear();
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            var request = await client.PutAsync("api/MASFlight/Update-Flight", new StringContent(data, Encoding.UTF8));
+            var request = await client.GetAsync($"api/MASFlight/Get-Single-Flight?Id={Id}");
             var response = await request.Content.ReadAsStringAsync();
             var flight = JsonConvert.DeserializeObject<CreateBookingViewModel>(response);
+            return View(flight);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Edit(CreateBookingViewModel model)
+        {
+            string data = JsonConvert.SerializeObject(model);
+            StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
+            HttpResponseMessage responseMessage = client.PutAsync(url + "api/MASFlight/Update-Flight/", content).Result;
 
-            if (request.IsSuccessStatusCode)
+            if (responseMessage.IsSuccessStatusCode)
             {
                 return RedirectToAction(nameof(Index));
             }
 
             ModelState.AddModelError(string.Empty, "Fill all details");
-            return View(flight);
+            return View(model);
+
+
+            //client.BaseAddress = new Uri(url);
+            //var data = JsonConvert.SerializeObject(model);
+            //client.DefaultRequestHeaders.Accept.Clear();
+            //client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            //var request = await client.PutAsync("api/MASFlight/Update-Flight", new StringContent(data, Encoding.UTF8));
+            //var response = await request.Content.ReadAsStringAsync();
+            //var flight = JsonConvert.DeserializeObject<CreateBookingViewModel>(response);
+
         }
 
 
@@ -108,7 +121,7 @@ namespace MASFlightBookingWebApp.Controllers
             var request = await client.DeleteAsync($"api/MASFlight/Cancel-Flight?id={Id}");
             var response = await request.Content.ReadAsStringAsync();
             var flight = JsonConvert.DeserializeObject<CreateBookingViewModel>(response);
-            return View(flight);
+            return RedirectToAction("Privacy");
 
         }
 
