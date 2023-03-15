@@ -114,18 +114,24 @@ namespace MASFlightBookingWebApp.Controllers
         }
 
 
-        public async Task<IActionResult> Delete(Guid Id)
+        public async Task<IActionResult> Cancel(Guid Id)
         {
 
             client.BaseAddress = new Uri(url);
             var request = await client.DeleteAsync($"api/MASFlight/Cancel-Flight?id={Id}");
             var response = await request.Content.ReadAsStringAsync();
             var flight = JsonConvert.DeserializeObject<CreateBookingViewModel>(response);
-            return RedirectToAction("Privacy");
-
+            return RedirectToAction("Index");
         }
 
-
+        public async Task<IActionResult> Delete(Guid Id)
+        {
+            client.BaseAddress = new Uri(url);
+            var request = await client.GetAsync($"api/MASFlight/Get-Single-Flight?Id={Id}");
+            var response = await request.Content.ReadAsStringAsync();
+            var flight = JsonConvert.DeserializeObject<CreateBookingViewModel>(response);
+            return View(flight);
+        }
         public IActionResult Privacy()
         {
             return View();
