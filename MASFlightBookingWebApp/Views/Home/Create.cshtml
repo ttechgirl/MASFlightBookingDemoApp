@@ -1,4 +1,7 @@
-﻿@model MASFlightBooking.Domain.ViewModels.CreateBookingViewModel
+﻿@model MASFlightBooking.Domain.ViewModels.CreateBookingViewModel;
+
+@using MASFlightBooking.Domain.ViewModels
+
 
 @{
     ViewData["Title"] = "Create";
@@ -95,16 +98,25 @@
                 <input asp-for="TripType" class="form-control" />
                 <span asp-validation-for="TripType" class="text-danger"></span>*@
             </div>
-            <div class="form-group">
+            @*<div class="form-group">
                 <label asp-for="AirlineId" class="control-label"></label>
                 <input asp-for="AirlineId" class="form-control" />
                 <span asp-validation-for="AirlineId" class="text-danger"></span>
-            </div>
+            </div>*@
             <div class="form-group">
                 <label asp-for="FlightCategoryId" class="control-label"></label>
                 <input asp-for="FlightCategoryId" class="form-control" />
                 <span asp-validation-for="FlightCategoryId" class="text-danger"></span>
             </div>
+            <div class="form-group">
+                <label asp-for="AirlineId" class="control-label">Airline</label>
+                <select name="AirlineId">
+                        <option selected="selected" value="">None</option>
+                        @foreach(AirlineViewModel airline  in ViewBag.Airlines){
+                            <option value="@airline.Id">@airline.AirlineName</option>
+                        }
+                </select>
+             </div>
              <div class="form-group">
                 <label asp-for="PassangerInfo.Name" class="control-label"></label>
                 <input asp-for="PassangerInfo.Name" class="form-control" />

@@ -65,6 +65,7 @@ namespace MASFlightBooking.Domain.ViewModels
         public TripType TripType { get; set; }
         public Guid AirlineId { get; set; }
         public Guid FlightCategoryId { get; set; }
+
         
 
         //explicit conversion

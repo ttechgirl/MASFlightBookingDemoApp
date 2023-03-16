@@ -17,22 +17,8 @@ namespace MASFlightBookingWebApp.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            var url = configuration.GetValue<string>("API:url");
-            IEnumerable<AirlineViewModel> airline = new List<AirlineViewModel>();
-            client.BaseAddress = new Uri(url + "api/Airline/");
-
-            var request = await client.GetAsync("GetAirlines");
-            if (!ModelState.IsValid)
-            {
-
-                airline = Enumerable.Empty<AirlineViewModel>();
-                ModelState.AddModelError(string.Empty, "Airline not found");
-                return View(request);
-
-            }
-            var response = await request.Content.ReadAsStringAsync();
-            airline = JsonConvert.DeserializeObject<List<AirlineViewModel>>(response);
-            return View(airline);
+            
+            return View();
         }
 
         public async Task<IActionResult> GetDetails(Guid Id)

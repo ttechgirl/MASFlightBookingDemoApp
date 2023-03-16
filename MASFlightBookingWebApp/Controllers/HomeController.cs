@@ -1,9 +1,11 @@
 ﻿using MASFlightBooking.DataAccess.Dtos;
 using MASFlightBooking.Domain.ViewModels;
+using MASFlightBookingWebApp.Concrete.Interface;
 using MASFlightBookingWebApp.Models;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Diagnostics;
+using System.Dynamic;
 using System.Net.Http.Headers;
 using System.Text;
 
@@ -13,16 +15,15 @@ namespace MASFlightBookingWebApp.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IConfiguration configuration;
-
+        private readonly IAirlineService airlineService;
         // string url = "https://localhost:7113/";
         HttpClient client = new HttpClient();
 
-        public HomeController(ILogger<HomeController> logger,IConfiguration configuration)
+        public HomeController(ILogger<HomeController> logger, IConfiguration configuration, IAirlineService airlineService = null)
         {
             _logger = logger;
             this.configuration = configuration;
-
-
+            this.airlineService = airlineService;
         }
 
         //GetAllFlights
@@ -59,9 +60,9 @@ namespace MASFlightBookingWebApp.Controllers
 
         }
 
-        public ActionResult Create()
+        public async Task<ActionResult> Create()
         {
-
+            ViewBag.Airlines = await airlineService.GetAllAirlines();
             return View();
         }
 
