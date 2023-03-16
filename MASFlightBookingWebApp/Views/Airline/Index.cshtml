@@ -1,0 +1,61 @@
+﻿@model IEnumerable<MASFlightBooking.Domain.ViewModels.AirlineViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Airline)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AirlineName)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Airline)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AirlineName)
+            </td>
+            <td>
+               <p>
+
+                   <a asp-action="Edit" asp-route-id="@item.Id" class= "btn btn-secondary"> Update Airline</a>
+                </p> 
+                <p>
+                   <a asp-action="GetDetails" asp-route-id="@item.Id" class= "btn btn-secondary"> Check Airlines</a>
+                </p>  
+                <p>
+                   <a asp-action="Delete" asp-route-id="@item.Id" class= "btn btn-secondary" > Delete Airline</a>
+                </p>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -8,14 +8,14 @@
 <h2>Cancel Flight</h2>
 
 <h3>Are you sure you want to cancel flight?</h3>
-@*<div>
+<div>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Id)
+            @Html.HiddenFor(model => model.Id)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Id)
+            @Html.HiddenFor(model => model.Id)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.BookedDate)
@@ -59,10 +59,12 @@
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.FlightCategoryId)
         </dd>
-    </dl>*@
+    </dl>
     
-    <hr />
-<div class="row">
+   <hr />
+            <a asp-action="Index"  class = "btn btn-primary">&lt;&lt; Back to List</a>
+            <a asp-action="Cancel" asp-route-id="@Model.Id"  type="submit" class = "btn btn-danger">Cancel</a>
+@*<div class="row">
     <div class="col-md-4">
     <form asp-action="Cancel">
 
@@ -77,6 +79,6 @@
             <a asp-action="Index"  class = "btn btn-primary">&lt;&lt; Back to List</a>
             <a asp-action="Cancel" asp-route-id="@Model.Id"  type="submit" class = "btn btn-danger">Cancel</a>
     </form>
-    </div>
+    </div>*@
        
 </div>

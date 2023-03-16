@@ -12,17 +12,24 @@ namespace MASFlightBookingWebApp.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        string url = "https://localhost:7113/";
+        private readonly IConfiguration configuration;
+
+        // string url = "https://localhost:7113/";
         HttpClient client = new HttpClient();
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger,IConfiguration configuration)
         {
             _logger = logger;
+            this.configuration = configuration;
+
+
         }
 
         //GetAllFlights
         public async Task<IActionResult> Index()
         {
+            var url = configuration.GetValue<string>("API:url");
+
             IEnumerable<CreateBookingViewModel> flight = new List<CreateBookingViewModel>();
             client.BaseAddress = new Uri(url + "api/MASFlight/");
 
@@ -43,7 +50,7 @@ namespace MASFlightBookingWebApp.Controllers
 
         public async Task<IActionResult> GetDetails(Guid Id)
         {
-
+            var url = configuration.GetValue<string>("API:url");
             client.BaseAddress = new Uri(url);
             var request = await client.GetAsync($"api/MASFlight/Get-Single-Flight?Id={Id}");
             var response = await request.Content.ReadAsStringAsync();
@@ -62,6 +69,7 @@ namespace MASFlightBookingWebApp.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(CreateBookingViewModel model)
         {
+            var url = configuration.GetValue<string>("API:url");
 
             client.BaseAddress = new Uri(url);
             var data = JsonConvert.SerializeObject(model);
@@ -81,6 +89,9 @@ namespace MASFlightBookingWebApp.Controllers
 
         public async Task<IActionResult> Edit(Guid Id)
         {
+
+            var url = configuration.GetValue<string>("API:url");
+
             client.BaseAddress = new Uri(url);
             var request = await client.GetAsync($"api/MASFlight/Get-Single-Flight?Id={Id}");
             var response = await request.Content.ReadAsStringAsync();
@@ -90,9 +101,11 @@ namespace MASFlightBookingWebApp.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(CreateBookingViewModel model)
         {
+            var url = configuration.GetValue<string>("API:url");
+
             string data = JsonConvert.SerializeObject(model);
             StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
-            HttpResponseMessage responseMessage = client.PutAsync(url + "api/MASFlight/Update-Flight/", content).Result;
+            var responseMessage = await client.PutAsync(url + "api/MASFlight/Update-Flight/", content);
 
             if (responseMessage.IsSuccessStatusCode)
             {
@@ -103,19 +116,16 @@ namespace MASFlightBookingWebApp.Controllers
             return View(model);
 
 
-            //client.BaseAddress = new Uri(url);
             //var data = JsonConvert.SerializeObject(model);
-            //client.DefaultRequestHeaders.Accept.Clear();
-            //client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            //var request = await client.PutAsync("api/MASFlight/Update-Flight", new StringContent(data, Encoding.UTF8));
+            //var request = await client.PutAsync("api/MASFlight/Update-Flight", new StringContent(data, Encoding.UTF8,"application/json"));
             //var response = await request.Content.ReadAsStringAsync();
-            //var flight = JsonConvert.DeserializeObject<CreateBookingViewModel>(response);
 
         }
 
 
         public async Task<IActionResult> Cancel(Guid Id)
         {
+            var url = configuration.GetValue<string>("API:url");
 
             client.BaseAddress = new Uri(url);
             var request = await client.DeleteAsync($"api/MASFlight/Cancel-Flight?id={Id}");
@@ -126,6 +136,8 @@ namespace MASFlightBookingWebApp.Controllers
 
         public async Task<IActionResult> Delete(Guid Id)
         {
+            var url = configuration.GetValue<string>("API:url");
+
             client.BaseAddress = new Uri(url);
             var request = await client.GetAsync($"api/MASFlight/Get-Single-Flight?Id={Id}");
             var response = await request.Content.ReadAsStringAsync();
