@@ -16,14 +16,17 @@ namespace MASFlightBookingWebApp.Controllers
         private readonly ILogger<HomeController> _logger;
         private readonly IConfiguration configuration;
         private readonly IAirlineService airlineService;
+        private readonly IFlightCategoryService categoryService;
+
         // string url = "https://localhost:7113/";
         HttpClient client = new HttpClient();
 
-        public HomeController(ILogger<HomeController> logger, IConfiguration configuration, IAirlineService airlineService = null)
+        public HomeController(ILogger<HomeController> logger, IConfiguration configuration, IAirlineService airlineService ,IFlightCategoryService categoryService)
         {
             _logger = logger;
             this.configuration = configuration;
             this.airlineService = airlineService;
+            this.categoryService = categoryService; 
         }
 
         //GetAllFlights
@@ -63,6 +66,7 @@ namespace MASFlightBookingWebApp.Controllers
         public async Task<ActionResult> Create()
         {
             ViewBag.Airlines = await airlineService.GetAllAirlines();
+            ViewBag.Category = await categoryService.GetAllCategories();
             return View();
         }
 
@@ -90,6 +94,8 @@ namespace MASFlightBookingWebApp.Controllers
 
         public async Task<IActionResult> Edit(Guid Id)
         {
+            ViewBag.Airlines = await airlineService.GetAllAirlines();
+            ViewBag.Category = await categoryService.GetAllCategories();
 
             var url = configuration.GetValue<string>("API:url");
 

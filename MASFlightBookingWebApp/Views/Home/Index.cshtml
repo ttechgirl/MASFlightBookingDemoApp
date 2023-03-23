@@ -1,22 +1,41 @@
 ﻿@model IEnumerable<MASFlightBooking.Domain.ViewModels.CreateBookingViewModel>
+        @using MASFlightBooking.Domain.ViewModels
 
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 
 }
+  <div class="col-lg-6 mb-4">
+
+                            <!-- Safety Tips -->
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">Safety Tips</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="text-center">
+                                        <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;"
+                                            src="~/assets/img/flightsafetytips.jpg" alt="...">
+                                    </div>
+                                    <p>Your safety is more valuable to us! Kindly
+                                        read below the Dos and Don'ts before boarding the plane</p>
+                                   @* <a target="_blank" rel="nofollow" href="#">Browse Illustrations on
+                                        unDraw &rarr;</a>*@
+                                </div>
+                            </div>
+</div>
 
 <h1>Available Flights</h1>
 
-<p>
+@*<p>
     <a asp-action="Create" class= "btn btn-secondary">&gt;&gt; Book Flight</a>
-</p>
+</p>*@
 <table class="table">
     <thead>
         <tr>
 
             <th>
-                @*@Html.HiddenFor(model => model.Id)*@
                 @Html.DisplayNameFor(model => model.Id)
             </th>
             <th>
@@ -34,9 +53,12 @@
             <th>
                 @Html.DisplayNameFor(model => model.TripType)
             </th>
-             <th>
-                @Html.DisplayNameFor(model => model.AirlineId)
-            </th>
+                 <th>
+                    @Html.DisplayNameFor(model => model.AirlineId)
+                </th>
+             
+                  @*<th scope="col">Airline</th>*@
+            
              <th>
                 @Html.DisplayNameFor(model => model.FlightCategoryId)
             </th>
@@ -69,6 +91,7 @@
     </thead>
     <tbody>
 @foreach (var item in Model) {
+
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Id)
@@ -88,7 +111,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.TripType)
             </td>
-             <td>
+              <td>
                 @Html.DisplayFor(modelItem => item.AirlineId)
             </td>
              <td>
@@ -118,10 +141,8 @@
              <td>
                 @Html.DisplayFor(modelItem => item.NextOfKin.Relationhsip)
             </td>
-           
-            <td>
+           <td>
                 <p>
-
                    <a asp-action="Edit" asp-route-id="@item.Id" class= "btn btn-secondary"> Update Flight</a>
                 </p> 
                 <p>
@@ -130,15 +151,16 @@
                 <p>
                    <a asp-action="Delete" asp-route-id="@item.Id" class= "btn btn-secondary" > Cancel Flight</a>
                 </p>
-
-
-                @*@Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "GetDetails", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
+                
             </td>
         </tr>
-}        <tr>
+        <tr>
             @Html.ValidationSummary(true,"",new{@class = "text-danger"})
         </tr>
+        }
     </tbody>
 </table>
+ @*  @foreach (AirlineViewModel airline in ViewBag.Airline){
+                      <td>@airline.AirlineName</td>
+                }
+            <td>*@

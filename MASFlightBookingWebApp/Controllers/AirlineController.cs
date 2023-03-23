@@ -7,7 +7,6 @@ namespace MASFlightBookingWebApp.Controllers
     public class AirlineController : Controller
     {
 
-       /// string url = "https://localhost:7113/";
         HttpClient client = new HttpClient();
         private readonly IConfiguration configuration;
         public AirlineController(IConfiguration configuration)

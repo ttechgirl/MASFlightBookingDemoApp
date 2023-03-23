@@ -1,34 +1,23 @@
-﻿@model MASFlightBooking.Domain.ViewModels.CreateBookingViewModel;
+﻿        @model MASFlightBooking.Domain.ViewModels.CreateBookingViewModel;
 
-@using MASFlightBooking.Domain.ViewModels
+        @using MASFlightBooking.Domain.ViewModels
 
 
-@{
-    ViewData["Title"] = "Create";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
+        @{
+        ViewData["Title"] = "Create";
+        Layout = "~/Views/Shared/_Layout.cshtml";
+        }
 
-<h1>Book Flight</h1>
+        <h1>Book Flight</h1>
 
-<hr />
-<div class="row">
-    <div class="col-md-4">
+        <hr />
+        <div class="row">
+        <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <input type="hidden" asp-for="Id" class="form-control" />
 
                 <input type="hidden" asp-for="BookedDate" class="form-control" />
-
-           @* <div class="form-group">
-                <label asp-for="Id" class="control-label"></label>
-                <input asp-for="Id" class="form-control" />
-                <span asp-validation-for="Id" class="text-danger"></span>
-            </div>*@
-           @* <div class="form-group">
-                <label asp-for="BookedDate" class="control-label"></label>
-                <input asp-for="BookedDate" class="form-control" />
-                <span asp-validation-for="BookedDate" class="text-danger"></span>
-            </div>*@
             <div class="form-group">
                 <label asp-for="FlightDate" class="control-label"></label>
                 <input asp-for="FlightDate" class="form-control" />
@@ -37,9 +26,8 @@
             <div class="form-group">
                 <label>
                     Departure
-                    <br />
-                     <p>
-                     <select name ="Departure">
+                      <p>
+                        <select name ="Departure">
                             <option>None</option>
                             <option>Lagos_LOS</option>
                             <option>Abuja_ABV</option>
@@ -50,21 +38,16 @@
                             <option>Kaduna_KAD</option>
                             <option>Kano_KAN</option>
                             <option>Sokoto_SKO</option>
-                     </select>
-                
-                </p>
-                    </label>
-               @* <label asp-for="Departure" class="control-label"></label>
-                <input asp-for="Departure" class="form-control" />
-                <span asp-validation-for="Departure" class="text-danger"></span>*@
+                        </select>
+                  </p>
+                </label>
             </div>
             <div class="form-group">
 
                 <label>
                     Destination
-                    <br />
-                     <p>
-                     <select name ="Destination">
+                   <p>
+                        <select name ="Destination">
                             <option>None</option>
                             <option>Lagos_LOS</option>
                             <option>Abuja_ABV</option>
@@ -75,49 +58,47 @@
                             <option>Kaduna_KAD</option>
                             <option>Kano_KAN</option>
                             <option>Sokoto_SKO</option>
-                     </select>
-                </p>
-                    </label>
-               @*     <label asp-for="Destination" class="control-label"></label>
-                <input asp-for="Destination" class="form-control" />
-                <span asp-validation-for="Destination" class="text-danger"></span>*@
+                        </select>
+                 </p>
+               </label>
             </div>
             <div class="form-group">
                 <label>
                     Trip Type
-                    <br />
-                     <p>
-                     <select name ="Trip_Type">
+                        <p>
+                        <select name ="Trip_Type">
                             <option> None</option>
                             <option> RoundTrip </option>
                             <option> OneWay</option>
-                     </select>
+                        </select>
                 </p>
-                    </label>
-             @*   <label asp-for="TripType" class="control-label"></label>
-                <input asp-for="TripType" class="form-control" />
-                <span asp-validation-for="TripType" class="text-danger"></span>*@
-            </div>
-            @*<div class="form-group">
-                <label asp-for="AirlineId" class="control-label"></label>
-                <input asp-for="AirlineId" class="form-control" />
-                <span asp-validation-for="AirlineId" class="text-danger"></span>
-            </div>*@
-            <div class="form-group">
-                <label asp-for="FlightCategoryId" class="control-label"></label>
-                <input asp-for="FlightCategoryId" class="form-control" />
-                <span asp-validation-for="FlightCategoryId" class="text-danger"></span>
+                </label>
             </div>
             <div class="form-group">
-                <label asp-for="AirlineId" class="control-label">Airline</label>
-                <select name="AirlineId">
+                <label asp-for="FlightCategoryId" class="control-label">Flight Category</label>
+                <br />
+                <p>
+                        <select name="FlightCategoryId">
                         <option selected="selected" value="">None</option>
+                        @foreach(FlightCategoryViewModel categoty  in ViewBag.Category){
+                            <option value="@categoty.Id">@categoty.CategoryName</option>
+                        }
+                </select>
+                </p>
+            </div>
+              <div class="form-group">
+                <label asp-for="AirlineId" class="control-label">Airline</label>
+                <p>
+                        <select name="AirlineId">
+                        <option selected="selected" value="">None</option>
+                        @*calling  enum props in the AirlineViewModel*@
                         @foreach(AirlineViewModel airline  in ViewBag.Airlines){
                             <option value="@airline.Id">@airline.AirlineName</option>
                         }
                 </select>
-             </div>
-             <div class="form-group">
+                </p>
+            </div>
+            <div class="form-group">
                 <label asp-for="PassangerInfo.Name" class="control-label"></label>
                 <input asp-for="PassangerInfo.Name" class="form-control" />
                 <span asp-validation-for="PassangerInfo.Name" class="text-danger"></span>
@@ -137,27 +118,36 @@
                 <input asp-for="PassangerInfo.Email" class="form-control" />
                 <span asp-validation-for="PassangerInfo.Email" class="text-danger"></span>
             </div>
-             <div class="form-group">
-                <label asp-for="PassangerInfo.MaturityLevel" class="control-label"></label>
-                <input asp-for="PassangerInfo.MaturityLevel" class="form-control" />
-                <span asp-validation-for="PassangerInfo.MaturityLevel" class="text-danger"></span>
-            </div>
+                 <div class="form-group">
+                    <label asp-for="PassangerInfo.MaturityLevel" class="control-label">
+                          <p>
+                            <select name ="MaturityLevel">
+                                <option> None</option>
+                                <option> Adult </option>
+                                <option>Children </option>
+                                <option>Infact </option>
+                            </select>
+                       </p>
+                   </label>
+                   @* <input asp-for="PassangerInfo.MaturityLevel" class="form-control" />
+                    <span asp-validation-for="PassangerInfo.MaturityLevel" class="text-danger"></span>*@
+                </div>
             <div class="form-group">
                 <label asp-for="NextOfKin.Name" class="control-label"></label>
                 <input asp-for="NextOfKin.Name" class="form-control" />
                 <span asp-validation-for="NextOfKin.Name" class="text-danger"></span>
             </div>
-              <div class="form-group">
+                <div class="form-group">
                 <label asp-for="NextOfKin.PhoneNumber" class="control-label"></label>
                 <input asp-for="NextOfKin.PhoneNumber" class="form-control" />
                 <span asp-validation-for="NextOfKin.PhoneNumber" class="text-danger"></span>
             </div>
-              <div class="form-group">
+                <div class="form-group">
                 <label asp-for="NextOfKin.Relationhsip" class="control-label"></label>
                 <input asp-for="NextOfKin.Relationhsip" class="form-control" />
                 <span asp-validation-for="NextOfKin.Relationhsip" class="text-danger"></span>
             </div>
-              <div class="form-group">
+                <div class="form-group">
                 <label asp-for="NextOfKin.Address" class="control-label"></label>
                 <input asp-for="NextOfKin.Address" class="form-control" />
                 <span asp-validation-for="NextOfKin.Address" class="text-danger"></span>
@@ -168,10 +158,9 @@
                 <a asp-action="Index" class = "btn btn-primary">Previous Page</a>
 
             </div>
-        </form>
-    </div>
-</div>
-
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+       </form>
+       </div>
+       </div>
+        @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+        }

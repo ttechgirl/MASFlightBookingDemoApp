@@ -1,4 +1,5 @@
 ﻿using MASFlightBooking.Domain.ViewModels;
+using MASFlightBookingWebApp.Concrete.Interface;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
@@ -15,22 +16,7 @@ namespace MASFlightBookingWebApp.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            var url = configuration.GetValue<string>("API:url");
-            IEnumerable<FlightCategoryViewModel> category = new List<FlightCategoryViewModel>();
-            client.BaseAddress = new Uri(url + "api/FlightCategory/");
-
-            var request = await client.GetAsync("GetCategory");
-            if (!ModelState.IsValid)
-            {
-
-                category = Enumerable.Empty<FlightCategoryViewModel>();
-                ModelState.AddModelError(string.Empty, "Flight category not found");
-                return View(request);
-
-            }
-            var response = await request.Content.ReadAsStringAsync();
-            category = JsonConvert.DeserializeObject<List<FlightCategoryViewModel>>(response);
-            return View(category);
+            return View();
         }
 
         public async Task<IActionResult> GetDetails(Guid Id)
