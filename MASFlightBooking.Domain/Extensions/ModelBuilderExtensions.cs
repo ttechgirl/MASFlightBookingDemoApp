@@ -1,16 +1,20 @@
 ﻿using MASFlightBooking.Domain.Enums;
 using MASFlightBooking.Domain.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static MASFlightBooking.Domain.Models.UserIdentityModel;
 
 namespace MASFlightBooking.Domain.Extensions
 {
     public static class ModelBuilderExtensions
     {
+        public static PasswordHasher<AppUsers> Hasher { get; set; } = new PasswordHasher<AppUsers>();
+
         public static void Seed(this ModelBuilder builder)
         {
             builder.Entity<MASFlightBookingModel>().HasData(
@@ -31,8 +35,6 @@ namespace MASFlightBooking.Domain.Extensions
                     Status = Status.Available,
                     AirlineName = "Dana Air",
                     Airline = Airlines.Dana_Air,
-                   
-
                 });
 
             builder.Entity<AirlineModel>().HasData(
@@ -42,7 +44,6 @@ namespace MASFlightBooking.Domain.Extensions
                    Status = Status.Unavailable,
                    AirlineName = "Air France",
                    Airline = Airlines.Air_France,
-
                });
 
             builder.Entity<AirlineModel>().HasData(
@@ -52,7 +53,6 @@ namespace MASFlightBooking.Domain.Extensions
                   Status = Status.Available,
                   AirlineName = "IRS",
                   Airline = Airlines.IRS,
-
               });
 
             builder.Entity<AirlineModel>().HasData(
@@ -86,7 +86,6 @@ namespace MASFlightBooking.Domain.Extensions
                     Address = "Abule egba ",
                     MaturityLevel = TravelerAge.Adult,
                     NextOfKinId = Guid.Parse("0ffe12ec-ea61-4e47-8a5c-e753a5fe2823")
-
                 });
 
 
@@ -97,7 +96,6 @@ namespace MASFlightBooking.Domain.Extensions
                     Name = "Mustapha Lateefat",
                     PhoneNumber = "08084491078",
                     Address = "Abule egba "
-
                 });
                 
 
@@ -145,7 +143,29 @@ namespace MASFlightBooking.Domain.Extensions
 
                 });
 
+            //app user
+            builder.Entity<AppUsers>().HasData(
+           new AppUsers
+           {
+               Id = Guid.NewGuid(),
+               FirstName = "Akeem",
+               LastName = "Mustapha",
+               PhoneNumber = "08055423378",
+               Email = "akeem234@gmail.com",
+               PasswordHash = Hasher.HashPassword(null, "AHakeem1%")
 
+           });
+
+            //app role
+            builder.Entity<AppRoles>().HasData(
+            new AppRoles
+            {
+                Id = Guid.Parse("69D545C8-B65E-4FFF-82AC-BCE73AC289A3"),
+                Name = "User",
+                NormalizedName = "User",
+                ConcurrencyStamp = "1"
+
+            });
 
         }
       

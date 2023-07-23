@@ -18,16 +18,17 @@ namespace MASFlightBooking.Domain.Models.Map
 
         }
    
-        private void SetUpData(EntityTypeBuilder<AppRoles> builder)
+        public static void SetUpData(EntityTypeBuilder<AppRoles> builder)
         {
             var appRoles = new AppRoles[]
             {
                 new AppRoles
                 {
-                    Id = Guid.Parse("42a81885-30d8-4769-8c31-eb73bfe098b1"),
-                    Name = "Admin User",
-                    NormalizedName = "Admin User",
-                    IsInBuilt = true,
+
+                    //Id = Guid.Parse("69D545C8-B65E-4FFF-82AC-BCE73AC289A3"),
+                    //Name = "User",
+                    //NormalizedName = "User",
+                    //ConcurrencyStamp = "1"
 
                 },
                 
@@ -40,6 +41,5 @@ namespace MASFlightBooking.Domain.Models.Map
 
 
 
-//seed data to be added for approleclaims 
 
 

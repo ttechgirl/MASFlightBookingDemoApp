@@ -1,5 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Org.BouncyCastle.Utilities.Collections;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +13,8 @@ namespace MASFlightBooking.Domain.Models.Map
 {
     public class AppUserMap : IEntityTypeConfiguration<AppUsers>
     {
+        public static PasswordHasher<AppUsers> Hasher { get; set; } = new PasswordHasher<AppUsers>();
+
         public void Configure(EntityTypeBuilder<AppUsers> builder)
         {
             builder.ToTable(nameof(AppUsers));
@@ -23,11 +27,12 @@ namespace MASFlightBooking.Domain.Models.Map
             {
                 new AppUsers
                 {
-                    Id = Guid.Parse("2ec30fa6-55f0-401e-ad9a-78e16992dc29"),
-                    UserName = "Shazy",
-                    NormalizedUserName = "Shazy",
-                    NormalizedEmail = "ayisatmustapha@icloud.com",
-                    ConcurrencyStamp =Guid.NewGuid().ToString(),
+                   //Id = Guid.NewGuid(),
+                   //FirstName = "Akeem",
+                   //LastName = "Mustapha",
+                   //PhoneNumber = "08055423378",
+                   //Email = "akeem234@gmail.com",
+                   //PasswordHash = Hasher.HashPassword(null, "AHakeem1%")
 
                 },
             };

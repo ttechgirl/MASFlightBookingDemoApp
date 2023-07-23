@@ -23,21 +23,19 @@ namespace MASFlightBooking.Domain.Models
             public string? LastName { get; set; }
             public string? FirstName { get; set; }
             public string? MiddleName { get; set; }
-            public string? MobileNumber { get; set; }
             public string? Unit { get; set; }
             public int Gender { get; set; }
             public int UserType { get; set; }
             public Guid? UserTypeId { get; set; }
-            public DateTime? LastLoginDate { get; set; }
+            public DateTime? LastLoginDate { get; set; } = DateTime.UtcNow;
             public bool Activated { get; set; }
-            public bool IsDeleted { get; set; }
+            public bool IsDeleted { get; set; } =false;
             public DateTime CreatedOn { get; set; }
             public DateTime? ModifiedOn { get; set; }
             public string? CreatedBy { get; set; }
             public string? ModifiedBy { get; set; }
             public string? DeletedBy { get; set; }
-            public DateTime? DeletedOn { get; set; }
-            public string? Department { get; set; }
+            public DateTime? DeletedOn { get; set; } = DateTime.Now.Date;
             public bool IsPasswordDefault { get; set; }
 
         }

@@ -40,7 +40,6 @@ namespace MASFlightBookingWebApp.Controllers
             var request = await client.GetAsync("GetAllFlights");
             if (!ModelState.IsValid)
             {
-
                 flight = Enumerable.Empty<CreateBookingViewModel>();
                 ModelState.AddModelError(string.Empty, "Flight details not found");
                 return View(request);
@@ -105,6 +104,7 @@ namespace MASFlightBookingWebApp.Controllers
             var flight = JsonConvert.DeserializeObject<CreateBookingViewModel>(response);
             return View(flight);
         }
+
         [HttpPost]
         public async Task<IActionResult> Edit(CreateBookingViewModel model)
         {
@@ -128,7 +128,6 @@ namespace MASFlightBookingWebApp.Controllers
             //var response = await request.Content.ReadAsStringAsync();
 
         }
-
 
         public async Task<IActionResult> Cancel(Guid Id)
         {
@@ -162,5 +161,6 @@ namespace MASFlightBookingWebApp.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
     }
 }

@@ -19,26 +19,37 @@ namespace MASFlightBooking.Domain.Context
         public MASFlightDbContext(DbContextOptions<MASFlightDbContext> options) : base(options)
         { }
 
+        public MASFlightDbContext() { }
+
         public DbSet<MASFlightBookingModel> MASFlights { get; set; }
         public DbSet<AirlineModel> Airlines { get; set; }
         public DbSet<FlightCategoryModel> FlightCategories { get; set; }
         public DbSet<PassangerInfoModel> PassangerInfos { get; set; }
+        public DbSet<AppUsers> AppUsers { get; set; }
+        public DbSet<AppRoles> AppRoles { get; set; }
+
+
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-           base.OnModelCreating(builder);
-            builder.UseIdentityColumns();
+            base.OnModelCreating(builder);
+           // builder.UseIdentityColumns();
             builder.Seed();
-
-          //  builder.Entity<DateOnly>()
-          //.HaveConversion<DateOnlyConverter, DateOnlyComparer>()
-          //.HaveColumnType("date");
 
         }
 
-
-       
+        public class MASFlightDbContextFactory : IDesignTimeDbContextFactory<MASFlightDbContext>
+        {
+            public MASFlightDbContext CreateDbContext(string[] args)
+            {
+                var optionsBuilder = new DbContextOptionsBuilder<MASFlightDbContext>();
+                optionsBuilder.UseSqlServer("Server=SHAZYPC\\SQLEXPRESS;Database=MASFlightBooking.API;MultipleActiveResultSets=True;Trusted_Connection=True; ");
+                return new MASFlightDbContext(optionsBuilder.Options);
+            }
+        }
     }
+
+
     //public class DateOnlyConverter : ValueConverter<DateOnly, DateTime>
     //{
     //    /// <summary>

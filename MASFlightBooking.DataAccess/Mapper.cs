@@ -30,11 +30,8 @@ namespace MASFlightBooking.DataAccess
                 //BookedDate = model.BookedDate,
                 FlightDate = model.FlightDate,
                 TotalCost = model.TotalCost,
-
             };
-
         }
-
 
         public static MASFlightBookingDto Map(this MASFlightBookingModel entity)
         {

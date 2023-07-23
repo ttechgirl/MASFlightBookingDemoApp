@@ -59,7 +59,6 @@ namespace MASFlightBooking.Domain.Migrations
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     MiddleName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    MobileNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Unit = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Gender = table.Column<int>(type: "int", nullable: false),
                     UserType = table.Column<int>(type: "int", nullable: false),
@@ -73,7 +72,6 @@ namespace MASFlightBooking.Domain.Migrations
                     ModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DeletedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DeletedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    Department = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     IsPasswordDefault = table.Column<bool>(type: "bit", nullable: false),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -325,38 +323,48 @@ namespace MASFlightBooking.Domain.Migrations
                 columns: new[] { "Id", "Airline", "AirlineName", "CreatedBy", "CreatedOn", "DeletedBy", "DeletedOn", "IsDeleted", "ModifiedBy", "ModifiedOn", "Status" },
                 values: new object[,]
                 {
-                    { new Guid("14cf20ec-4426-4059-960e-9c42f8b19e9e"), 3, "MAS AIr", "", new DateTime(2023, 3, 13, 15, 21, 51, 477, DateTimeKind.Local).AddTicks(2809), "", null, false, "", null, 1 },
-                    { new Guid("6283d2df-ca2c-4d6f-bd2d-5cf48d317345"), 4, "Air France", "", new DateTime(2023, 3, 13, 15, 21, 51, 477, DateTimeKind.Local).AddTicks(2768), "", null, false, "", null, 0 },
-                    { new Guid("62f8ab72-f871-4add-ae73-3f9b5b22d329"), 2, "Ibom AIr", "", new DateTime(2023, 3, 13, 15, 21, 51, 477, DateTimeKind.Local).AddTicks(2828), "", null, false, "", null, 1 },
-                    { new Guid("6c7e9c5d-89ae-43d9-8f19-feb71af65e8f"), 0, "Dana Air", "", new DateTime(2023, 3, 13, 15, 21, 51, 477, DateTimeKind.Local).AddTicks(2725), "", null, false, "", null, 1 },
-                    { new Guid("cae5c97e-a07c-4656-9fa9-c6b8feb19019"), 1, "IRS", "", new DateTime(2023, 3, 13, 15, 21, 51, 477, DateTimeKind.Local).AddTicks(2790), "", null, false, "", null, 1 }
+                    { new Guid("14cf20ec-4426-4059-960e-9c42f8b19e9e"), 3, "MAS AIr", "", new DateTime(2023, 5, 29, 21, 33, 4, 775, DateTimeKind.Local).AddTicks(5092), "", null, false, "", null, 1 },
+                    { new Guid("6283d2df-ca2c-4d6f-bd2d-5cf48d317345"), 4, "Air France", "", new DateTime(2023, 5, 29, 21, 33, 4, 775, DateTimeKind.Local).AddTicks(5027), "", null, false, "", null, 0 },
+                    { new Guid("62f8ab72-f871-4add-ae73-3f9b5b22d329"), 2, "Ibom AIr", "", new DateTime(2023, 5, 29, 21, 33, 4, 775, DateTimeKind.Local).AddTicks(5123), "", null, false, "", null, 1 },
+                    { new Guid("6c7e9c5d-89ae-43d9-8f19-feb71af65e8f"), 0, "Dana Air", "", new DateTime(2023, 5, 29, 21, 33, 4, 775, DateTimeKind.Local).AddTicks(4981), "", null, false, "", null, 1 },
+                    { new Guid("cae5c97e-a07c-4656-9fa9-c6b8feb19019"), 1, "IRS", "", new DateTime(2023, 5, 29, 21, 33, 4, 775, DateTimeKind.Local).AddTicks(5061), "", null, false, "", null, 1 }
                 });
+
+            migrationBuilder.InsertData(
+                table: "AspNetRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "CreatedBy", "CreatedOn", "IsInBuilt", "ModifiedBy", "ModifiedOn", "Name", "NormalizedName" },
+                values: new object[] { new Guid("69d545c8-b65e-4fff-82ac-bce73ac289a3"), "1", null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false, null, null, "User", "User" });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUsers",
+                columns: new[] { "Id", "AccessFailedCount", "Activated", "ConcurrencyStamp", "CreatedBy", "CreatedOn", "DeletedBy", "DeletedOn", "Email", "EmailConfirmed", "FirstName", "Gender", "IsDeleted", "IsPasswordDefault", "LastLoginDate", "LastName", "LockoutEnabled", "LockoutEnd", "MiddleName", "ModifiedBy", "ModifiedOn", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "ProviderKey", "RefreshToken", "SecurityStamp", "TwoFactorEnabled", "Unit", "UserName", "UserType", "UserTypeId" },
+                values: new object[] { new Guid("51c46a0d-49f4-49c0-9db2-77e1caac484d"), 0, false, "4552f06b-e2a5-4821-b403-59ed552829da", null, new DateTime(2023, 5, 29, 20, 33, 4, 775, DateTimeKind.Utc).AddTicks(5488), null, new DateTime(2023, 5, 29, 0, 0, 0, 0, DateTimeKind.Local), "akeem234@gmail.com", false, "Akeem", 0, false, false, new DateTime(2023, 5, 29, 20, 33, 4, 775, DateTimeKind.Utc).AddTicks(5438), "Mustapha", false, null, null, null, null, null, null, "AQAAAAEAACcQAAAAEPOrjpJ2Bk2mlKQDwk98phL3OqtNl+wAYLcdv0IkyJlpPzm+kHKQdzYD1D11d1NGhw==", "08055423378", false, null, null, null, false, null, null, 0, null });
 
             migrationBuilder.InsertData(
                 table: "FlightCategories",
                 columns: new[] { "Id", "AmountPerSeat", "CategoryName", "CreatedBy", "CreatedOn", "DeletedBy", "DeletedOn", "FlightCategory", "IsDeleted", "ModifiedBy", "ModifiedOn", "Status" },
                 values: new object[,]
                 {
-                    { new Guid("185337b9-474e-49ae-8eff-f8ac0e4c65f7"), 210000.5, "First Class", "", new DateTime(2023, 3, 13, 15, 21, 51, 477, DateTimeKind.Local).AddTicks(2984), "", null, 2, false, "", null, 1 },
-                    { new Guid("73c5bcba-65b6-46a3-897f-7d67fc0480b8"), 50000.5, "Business", "", new DateTime(2023, 3, 13, 15, 21, 51, 477, DateTimeKind.Local).AddTicks(2922), "", null, 3, false, "", null, 1 },
-                    { new Guid("759b4322-8282-4758-8479-db06b6d4030c"), 35800.5, "Economy", "", new DateTime(2023, 3, 13, 15, 21, 51, 477, DateTimeKind.Local).AddTicks(2965), "", null, 0, false, "", null, 1 },
-                    { new Guid("f551bb7b-617b-4e56-9a7a-54358b4b9d38"), 123000.5, "Premium", "", new DateTime(2023, 3, 13, 15, 21, 51, 477, DateTimeKind.Local).AddTicks(2944), "", null, 1, false, "", null, 1 }
+                    { new Guid("185337b9-474e-49ae-8eff-f8ac0e4c65f7"), 210000.5, "First Class", "", new DateTime(2023, 5, 29, 21, 33, 4, 775, DateTimeKind.Local).AddTicks(5402), "", null, 2, false, "", null, 1 },
+                    { new Guid("73c5bcba-65b6-46a3-897f-7d67fc0480b8"), 50000.5, "Business", "", new DateTime(2023, 5, 29, 21, 33, 4, 775, DateTimeKind.Local).AddTicks(5296), "", null, 3, false, "", null, 1 },
+                    { new Guid("759b4322-8282-4758-8479-db06b6d4030c"), 35800.5, "Economy", "", new DateTime(2023, 5, 29, 21, 33, 4, 775, DateTimeKind.Local).AddTicks(5370), "", null, 0, false, "", null, 1 },
+                    { new Guid("f551bb7b-617b-4e56-9a7a-54358b4b9d38"), 123000.5, "Premium", "", new DateTime(2023, 5, 29, 21, 33, 4, 775, DateTimeKind.Local).AddTicks(5336), "", null, 1, false, "", null, 1 }
                 });
 
             migrationBuilder.InsertData(
                 table: "NextOfKin",
                 columns: new[] { "Id", "Address", "CreatedBy", "CreatedOn", "DeletedBy", "DeletedOn", "IsDeleted", "ModifiedBy", "ModifiedOn", "Name", "PhoneNumber", "Relationhsip" },
-                values: new object[] { new Guid("0ffe12ec-ea61-4e47-8a5c-e753a5fe2823"), "Abule egba ", "", new DateTime(2023, 3, 13, 15, 21, 51, 477, DateTimeKind.Local).AddTicks(2898), "", null, false, "", null, "Mustapha Lateefat", "08084491078", null });
+                values: new object[] { new Guid("0ffe12ec-ea61-4e47-8a5c-e753a5fe2823"), "Abule egba ", "", new DateTime(2023, 5, 29, 21, 33, 4, 775, DateTimeKind.Local).AddTicks(5248), "", null, false, "", null, "Mustapha Lateefat", "08084491078", null });
 
             migrationBuilder.InsertData(
                 table: "PassangerInfos",
                 columns: new[] { "Id", "Address", "CreatedBy", "CreatedOn", "DeletedBy", "DeletedOn", "Email", "IsDeleted", "MaturityLevel", "ModifiedBy", "ModifiedOn", "Name", "NextOfKinId", "PhoneNumber" },
-                values: new object[] { new Guid("923a643a-9c41-464e-9fe3-29656c34e589"), "Abule egba ", "", new DateTime(2023, 3, 13, 15, 21, 51, 477, DateTimeKind.Local).AddTicks(2859), "", null, "ayisatabiodun@gmail.com", false, 0, "", null, "Mustapha Akeem", new Guid("0ffe12ec-ea61-4e47-8a5c-e753a5fe2823"), "08084491078" });
+                values: new object[] { new Guid("923a643a-9c41-464e-9fe3-29656c34e589"), "Abule egba ", "", new DateTime(2023, 5, 29, 21, 33, 4, 775, DateTimeKind.Local).AddTicks(5192), "", null, "ayisatabiodun@gmail.com", false, 0, "", null, "Mustapha Akeem", new Guid("0ffe12ec-ea61-4e47-8a5c-e753a5fe2823"), "08084491078" });
 
             migrationBuilder.InsertData(
                 table: "MASFlights",
                 columns: new[] { "Id", "AirlineId", "CreatedBy", "CreatedOn", "DeletedBy", "DeletedOn", "Departure", "Destination", "FlightCategoryId", "FlightDate", "IsDeleted", "ModifiedBy", "ModifiedOn", "PassangerInfoId", "TotalCost", "TripType" },
-                values: new object[] { new Guid("43738933-acf0-4479-8624-0ef1bec0383d"), new Guid("6c7e9c5d-89ae-43d9-8f19-feb71af65e8f"), "", new DateTime(2023, 3, 13, 15, 21, 51, 477, DateTimeKind.Local).AddTicks(2423), "", null, 0, 0, new Guid("73c5bcba-65b6-46a3-897f-7d67fc0480b8"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false, "", null, new Guid("923a643a-9c41-464e-9fe3-29656c34e589"), 0m, 0 });
+                values: new object[] { new Guid("43738933-acf0-4479-8624-0ef1bec0383d"), new Guid("6c7e9c5d-89ae-43d9-8f19-feb71af65e8f"), "", new DateTime(2023, 5, 29, 21, 33, 4, 775, DateTimeKind.Local).AddTicks(4650), "", null, 0, 0, new Guid("73c5bcba-65b6-46a3-897f-7d67fc0480b8"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false, "", null, new Guid("923a643a-9c41-464e-9fe3-29656c34e589"), 0m, 0 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",

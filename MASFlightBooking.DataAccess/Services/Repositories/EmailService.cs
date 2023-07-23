@@ -1,0 +1,70 @@
+﻿using MASFlightBooking.DataAccess.Services.Interfaces;
+using MASFlightBooking.Domain.Models;
+using MASFlightBooking.Domain.ViewModels;
+using MailKit.Net.Smtp;
+using MimeKit;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net.Mail;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace MASFlightBooking.DataAccess.Services.Repositories
+{
+    public class EmailService:IEmailService
+    {
+        private readonly EmailConfig emailConfig;
+        public EmailService(EmailConfig emailConfig)
+        {
+            this.emailConfig = emailConfig;
+        }
+
+        public void SendEmail(Message message)
+        {
+            var emailMessage = CreateEmail(message);
+            Send(emailMessage);
+        }
+
+        private MimeMessage CreateEmail(Message message)
+        {
+            var emailMessage = new MimeMessage();
+
+            //adds a specified email address of the sender 
+            emailMessage.From.Add(new MailboxAddress("email", emailConfig.From));
+            //adds email address of the receivers(more than one) 
+            emailMessage.To.AddRange(message.To);
+            emailMessage.Subject = message.Subject;
+            emailMessage.Body = new TextPart(message.Body);
+            return emailMessage;
+        }
+
+        private void Send(MimeMessage message)
+        {
+            var client = new MailKit.Net.Smtp.SmtpClient();
+
+            try
+            {
+                //connecting to the smtp server
+                client.Connect(emailConfig.SmtpServer, emailConfig.Port, true);
+                //removes authentication supported bt smtpserver
+                client.AuthenticationMechanisms.Remove("XOAUTH2");
+                //adds authentication through the username and password provided in the appsettings
+                client.Authenticate(emailConfig.UserName, emailConfig.Password);
+                client.Send(message);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+            finally
+            {
+                client.Disconnect(true);
+                client.Dispose();
+            }
+
+
+        }
+    }
+}
+
