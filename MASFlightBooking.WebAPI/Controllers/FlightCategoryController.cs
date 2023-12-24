@@ -17,7 +17,6 @@ namespace MASFlightBooking.WebAPI.Controllers
         }
 
         [HttpGet("GetCategory")]
-
         public async Task<IActionResult> AirlineList()
         {
             var list = await _flightCategory.GetAllCategory();
@@ -43,7 +42,6 @@ namespace MASFlightBooking.WebAPI.Controllers
 
 
         [HttpPost("Create-Category")]
-
         public async Task<IActionResult> CreateCategory(FlightCategoryViewModel model)
         {
             var create = await _flightCategory.AddCategory(model);
@@ -56,7 +54,6 @@ namespace MASFlightBooking.WebAPI.Controllers
         }
 
         [HttpPut("Update-Category")]
-
         public async Task<IActionResult> UpdateCategory(FlightCategoryViewModel model)
         {
             var create = await _flightCategory.UpdateCategory(model);

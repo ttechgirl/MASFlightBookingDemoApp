@@ -90,7 +90,8 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+    @foreach (var item in Model)
+    {
 
         <tr>
             <td>
@@ -157,7 +158,7 @@
         <tr>
             @Html.ValidationSummary(true,"",new{@class = "text-danger"})
         </tr>
-        }
+    }
     </tbody>
 </table>
  @*  @foreach (AirlineViewModel airline in ViewBag.Airline){

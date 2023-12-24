@@ -84,8 +84,8 @@
                 <p>
                      <select name="FlightCategoryId">
                         <option selected="selected" value="">None</option>
-                        @foreach(FlightCategoryViewModel categoty  in ViewBag.Category){
-                            <option value="@categoty.Id">@categoty.CategoryName</option>
+                        @foreach(FlightCategoryViewModel category  in ViewBag.Category){
+                            <option value="@category.Id">@category.CategoryName</option>
                         }
                     </select>
                </p>
@@ -103,7 +103,7 @@
                    </select>
               </p>
             </div>
-              <div class="form-group">
+             <div class="form-group">
                 <label asp-for="PassangerInfo.Name" class="control-label"></label>
                 <input asp-for="PassangerInfo.Name" class="form-control" />
                 <span asp-validation-for="PassangerInfo.Name" class="text-danger"></span>
